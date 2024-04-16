@@ -26,7 +26,7 @@ public class GameDAO {
                 ArrayList<Category> categories = new ArrayList<>();
 
                 for (GameCategory gameCategory : gameCategories) {
-                    categories.add(categoryDAO.findById(gameCategory.getCategory_id()));
+                    categories.add(categoryDAO.findById(gameCategory.getCategoryId()));
                 }
 
                 Game game = new Game(rs.getInt("game.id"), rs.getString("game.name"), rs.getString("game.description"), rs.getDate("game.release_date"), rs.getInt("game.price"), categories);
@@ -56,7 +56,7 @@ public class GameDAO {
                 ArrayList<Category> categories = new ArrayList<>();
 
                 for (GameCategory gameCategory : gameCategories) {
-                    categories.add(categoryDAO.findById(gameCategory.getCategory_id()));
+                    categories.add(categoryDAO.findById(gameCategory.getCategoryId()));
                 }
 
 
