@@ -17,7 +17,7 @@ public class UserDAO {
             sql.setString(1, user.getPseudo());
             sql.setString(2, user.getPassword());
             sql.setString(3, user.getEmail());
-            sql.setBoolean(4, user.isAdmin());
+            sql.setBoolean(4, false);
 
             sql.executeUpdate();
 

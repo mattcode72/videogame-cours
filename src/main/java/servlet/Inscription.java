@@ -50,6 +50,7 @@ public class Inscription extends HttpServlet {
         User user = new User();
         user.setPseudo(pseudo);
         user.setEmail(email);
+        user.setAdmin(false);
 
         String hashPasword = BCrypt.hashpw(password, BCrypt.gensalt());
 
