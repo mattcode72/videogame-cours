@@ -18,8 +18,8 @@
 
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container-fluid">
-        <a class="navbar-brand" href="/Blog/">
-            <img alt="" src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/92/Open_book_nae_02.svg/800px-Open_book_nae_02.svg.png" width="75">
+        <a class="navbar-brand" href="/videogame/">
+            <img alt="" src="${pageContext.request.contextPath}/assets/img/videogame.jpg" width="75">
         </a>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">

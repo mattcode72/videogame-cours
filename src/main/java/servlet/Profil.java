@@ -87,7 +87,7 @@ public class Profil extends HttpServlet {
             if (request.getParameter("newPassword").equals(request.getParameter("confPassword"))) {
 
                 if (BCrypt.checkpw(request.getParameter("oldPassword"),
-                        ((User) session.getAttribute("currentUser")).getPassword()));
+                        ((User) session.getAttribute("currentUser")).getPassword()))
                 {
                     String hashNewPwd = BCrypt.hashpw(request.getParameter("newPassword"), BCrypt.gensalt());
 
