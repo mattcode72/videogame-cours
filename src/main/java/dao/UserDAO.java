@@ -46,4 +46,22 @@ public class UserDAO {
         }
         return null;
     }
+
+    public boolean checkMailExist(String email) {
+        try {
+            Database.Connect();
+            PreparedStatement sql = Database.connexion.prepareStatement("select * from users "
+                    + "WHERE users.email=?");
+            sql.setString(1, email);
+            ResultSet rs = sql.executeQuery();
+
+            if (rs.next()) {
+                return true;
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
 }
