@@ -2,22 +2,24 @@
 
 <div class="container">
     <div class="row row-cols-1 row-cols-md-3 g-4">
-        <c:forEach items="${games}" var="games">
+        <c:forEach items="${games}" var="game">
             <div class="col">
                 <div class="card" style="width: 18rem;">
                     <div class="card-body">
                         <h5 class="card-title">
                             <c:out value="${game.name}"></c:out>
                         </h5>
+                                                    <c:forEach items="${game.categories}" var="category">
+                                                        <span class="badge bg-primary">
+                                                            <c:out value="${category }"></c:out>
+                                                        </span>
+                                                    </c:forEach>
 <%--                        <h6 class="card-subtitle mb-2 text-body-secondary"> By--%>
 <%--                            <c:out value="${game.developer.name }"></c:out>--%>
 <%--                        </h6>--%>
-                        <p class="card-text">
-                            <c:out value="${game }"></c:out>
-                        </p>
-                        <div>
-                            <fmt:formatDate value="${game.release_date}" type="date" dateStyle="full"/>
-                        </div>
+<%--                        <p class="card-text">--%>
+<%--                            <c:out value="${game }"></c:out>--%>
+<%--                        </p>--%>
                     </div>
                     <div class="card-footer">
                         <!-- SHOW ARTICLE -->
