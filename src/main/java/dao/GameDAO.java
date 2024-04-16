@@ -38,6 +38,7 @@ public class GameDAO {
                 // On récupère les catégories d'un jeu
                 ArrayList<GameCategory> gameCategories = gameCategoryDAO.getCategoriesByGameId(rs.getInt("game.id"));
 
+                sout
 
                 Game game = new Game(rs.getString("game.name"),
                         rs.getString("game.description"),
