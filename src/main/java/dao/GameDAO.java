@@ -23,10 +23,14 @@ public class GameDAO {
 
             while (rs.next()) {
                 ArrayList<GameCategory> gameCategories = gameCategoryDAO.getCategoriesByGameId(rs.getInt("game.id"));
+
+                System.out.println("gameCategories: " + gameCategories);
+
                 ArrayList<Category> categories = new ArrayList<>();
 
                 for (GameCategory gameCategory : gameCategories) {
-                    categories.add(categoryDAO.findById(gameCategory.getCategoryId()));
+                    categories.add(categoryDAO.findById(gameCategory.getCategory().getId()));
+                    System.out.println(gameCategory.getCategory().getId());
                 }
 
                 Game game = new Game(rs.getInt("game.id"), rs.getString("game.name"), rs.getString("game.description"), rs.getDate("game.release_date"), rs.getInt("game.price"), categories);
@@ -56,9 +60,8 @@ public class GameDAO {
                 ArrayList<Category> categories = new ArrayList<>();
 
                 for (GameCategory gameCategory : gameCategories) {
-                    categories.add(categoryDAO.findById(gameCategory.getCategoryId()));
+                    categories.add(categoryDAO.findById(gameCategory.getCategory().getId()));
                 }
-
 
                 return new Game(rs.getString("name"), rs.getString("description"), rs.getDate("release_date"), rs.getInt("price"), categories);
             }

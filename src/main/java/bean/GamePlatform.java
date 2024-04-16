@@ -8,8 +8,11 @@ public class GamePlatform {
     }
 
     public GamePlatform(Game game, Platform platform) {
-        super();
         this.game = game;
+        this.platform = platform;
+    }
+
+    public GamePlatform(Platform platform) {
         this.platform = platform;
     }
 

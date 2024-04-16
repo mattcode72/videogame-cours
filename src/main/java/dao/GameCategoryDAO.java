@@ -23,7 +23,10 @@ public class GameCategoryDAO {
             ResultSet rs = sqlCategories.executeQuery();
 
             while (rs.next()) {
-                GameCategory gameCategory = new GameCategory(gameId, rs.getInt("category.id"));
+                Category category = new Category(rs.getInt("category.id"), rs.getString("category.name"));
+
+                GameCategory gameCategory = new GameCategory(category);
+
                 gameCategories.add(gameCategory);
             }
 

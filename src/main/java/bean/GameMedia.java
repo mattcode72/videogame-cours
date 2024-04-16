@@ -8,8 +8,11 @@ public class GameMedia {
     }
 
     public GameMedia(Game game, Media media) {
-        super();
         this.game = game;
+        this.media = media;
+    }
+
+    public GameMedia(Media media) {
         this.media = media;
     }
 

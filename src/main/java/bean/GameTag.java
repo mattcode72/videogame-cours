@@ -2,14 +2,18 @@ package bean;
 
 public class GameTag {
     private Game game;
+
     private Tag tag;
 
     public GameTag() {
     }
 
     public GameTag(Game game, Tag tag) {
-        super();
         this.game = game;
+        this.tag = tag;
+    }
+
+    public GameTag(Tag tag) {
         this.tag = tag;
     }
 

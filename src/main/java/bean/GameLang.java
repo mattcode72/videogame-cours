@@ -8,8 +8,11 @@ public class GameLang {
     }
 
     public GameLang(Game game, Lang lang) {
-        super();
         this.game = game;
+        this.lang = lang;
+    }
+
+    public GameLang(Lang lang) {
         this.lang = lang;
     }
 

@@ -1,30 +1,34 @@
 package bean;
 
 public class GameDeveloper {
-    private int gameId;
-    private int developerId;
+    private Game game;
+    private Developer developer;
 
     public GameDeveloper() {
     }
 
-    public GameDeveloper(int game_id, int developer_id) {
-        this.gameId = game_id;
-        this.developerId = developer_id;
+    public GameDeveloper(Game game, Developer developer) {
+        this.game = game;
+        this.developer = developer;
     }
 
-    public int getGame_id() {
-        return gameId;
+    public GameDeveloper(Developer developer) {
+        this.developer = developer;
     }
 
-    public void setGame_id(int gameId) {
-        this.gameId = gameId;
+    public Game getGame() {
+        return game;
     }
 
-    public int getDeveloperId() {
-        return developerId;
+    public void setGame(Game game) {
+        this.game = game;
     }
 
-    public void setDeveloperId(int developerId) {
-        this.developerId = developerId;
+    public Developer getDeveloper() {
+        return developer;
+    }
+
+    public void setDeveloper(Developer developer) {
+        this.developer = developer;
     }
 }

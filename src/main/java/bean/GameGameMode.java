@@ -1,30 +1,34 @@
 package bean;
 
 public class GameGameMode {
-    private int gameId;
-    private int gameModeId;
+    private Game game;
+    private GameMode gameMode;
 
     public GameGameMode() {
     }
 
-    public GameGameMode(int game_id, int gameMode_id) {
-        this.gameId = game_id;
-        this.gameModeId = gameMode_id;
+    public GameGameMode(Game game, GameMode gameMode) {
+        this.game = game;
+        this.gameMode = gameMode;
     }
 
-    public int getGame_id() {
-        return gameId;
+    public GameGameMode(GameMode gameMode) {
+        this.gameMode = gameMode;
     }
 
-    public void setGame_id(int gameId) {
-        this.gameId = gameId;
+    public Game getGame() {
+        return game;
     }
 
-    public int getGameModeId() {
-        return gameModeId;
+    public void setGame(Game game) {
+        this.game = game;
     }
 
-    public void setGameModeId(int gameModeId) {
-        this.gameModeId = gameModeId;
+    public GameMode getGameMode() {
+        return gameMode;
+    }
+
+    public void setGameMode(GameMode gameMode) {
+        this.gameMode = gameMode;
     }
 }
