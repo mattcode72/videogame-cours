@@ -14,13 +14,20 @@ public class GameDAO {
         ArrayList<Game> games = new ArrayList<>();
         Database.Connect();
 
+        CategoryDAO categoryDAO = new CategoryDAO();
+
         try {
             PreparedStatement sql = Database.connexion.prepareStatement("select game.id, game.name, game.description, game.release_date, game.price from game");
 
             ResultSet rs = sql.executeQuery();
 
             if (rs.next()) {
-                ArrayList<GameCategory> categories = gameCategoryDAO.getCategoriesByGameId(rs.getInt("game.id"));
+                ArrayList<GameCategory> gameCategories = gameCategoryDAO.getCategoriesByGameId(rs.getInt("game.id"));
+                ArrayList<Category> categories = new ArrayList<>();
+
+                for (GameCategory gameCategory : gameCategories) {
+                    categories.add(categoryDAO.findById(gameCategory.getCategory_id()));
+                }
 
                 Game game = new Game(rs.getInt("game.id"), rs.getString("game.name"), rs.getString("game.description"), rs.getDate("game.release_date"), rs.getInt("game.price"), categories);
 
