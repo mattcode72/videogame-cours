@@ -2,12 +2,9 @@ package bean;
 
 public class Media {
     private int id;
-
     private String filename;
     private String path;
-
     private Game game;
-
     private MediaType mediaType;
 
     public Media() {
@@ -26,6 +23,12 @@ public class Media {
         this.path = path;
         this.game = game;
         this.mediaType = mediaType;
+    }
+
+    public Media(int id, String filename, String path) {
+        this.id = id;
+        this.filename = filename;
+        this.path = path;
     }
 
     public int getId() {

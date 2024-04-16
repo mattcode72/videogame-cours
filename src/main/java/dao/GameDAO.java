@@ -33,7 +33,9 @@ public class GameDAO {
                     System.out.println(gameCategory.getCategory().getId());
                 }
 
-                Game game = new Game(rs.getInt("game.id"), rs.getString("game.name"), rs.getString("game.description"), rs.getDate("game.release_date"), rs.getInt("game.price"), categories);
+                Media thumbnail = new MediaDAO().getThumbnailByGameId(rs.getInt("game.id"));
+
+                Game game = new Game(rs.getInt("game.id"), rs.getString("game.name"), rs.getString("game.description"), rs.getDate("game.release_date"), rs.getInt("game.price"), categories, thumbnail);
 
                 games.add(game);
             }
@@ -50,7 +52,7 @@ public class GameDAO {
         CategoryDAO categoryDAO = new CategoryDAO();
         try  {
 
-            PreparedStatement sql = Database.connexion.prepareStatement("select * from game WHERE game.id=?");
+            PreparedStatement sql = Database.connexion.prepareStatement("select * from game WHERE game.id = ?");
 
             sql.setInt(1, id);
             ResultSet rs = sql.executeQuery();
@@ -63,7 +65,17 @@ public class GameDAO {
                     categories.add(categoryDAO.findById(gameCategory.getCategory().getId()));
                 }
 
-                return new Game(rs.getString("name"), rs.getString("description"), rs.getDate("release_date"), rs.getInt("price"), categories);
+                ArrayList<Media> images = new MediaDAO().getMediasPageByGameId(rs.getInt("game.id"), "image");
+                ArrayList<Media> videos = new MediaDAO().getMediasPageByGameId(rs.getInt("game.id"), "video");
+
+                ArrayList<GamePlatform> gamePlatforms = new GamePlatformDAO().getPlatformsByGameId(rs.getInt("game.id"));
+                ArrayList<Platform> platforms = new ArrayList<>();
+
+                for (GamePlatform gamePlatform : gamePlatforms) {
+                    platforms.add(gamePlatform.getPlatform());
+                }
+
+                return new Game(rs.getString("name"), rs.getString("description"), rs.getDate("release_date"), rs.getInt("price"), categories, images, videos, platforms);
             }
 
         } catch (Exception e) {

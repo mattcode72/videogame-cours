@@ -1,8 +1,6 @@
 package dao;
 
 import bean.Category;
-import bean.Game;
-import bean.GameCategory;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -20,6 +18,27 @@ public class CategoryDAO {
             if (rs.next()) {
                 return new Category(rs.getString("name"));
             }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public ArrayList<Category> getAll() {
+        ArrayList<Category> categories = new ArrayList<>();
+        try {
+            PreparedStatement sql = Database.connexion.prepareStatement("select * from category");
+
+            ResultSet rs = sql.executeQuery();
+
+            while (rs.next()) {
+                Category category = new Category(rs.getInt("id"), rs.getString("name"));
+
+                categories.add(category);
+            }
+
+            return categories;
 
         } catch (Exception e) {
             e.printStackTrace();
