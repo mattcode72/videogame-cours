@@ -10,11 +10,11 @@ import java.util.ArrayList;
 
 public class GameCategoryDAO {
 
-    public ArrayList<GameCategory> getCategoriesByGameId (int gameId) {
+    public ArrayList<GameCategory> getCategoriesByGameId (Game game) {
         ArrayList<GameCategory> gameCategories = new ArrayList<>();
-        Database.Connect();
 
         GameDAO gameDAO = new GameDAO();
+        int gameId = game.getId();
 
         try {
             PreparedStatement sqlCategories = Database.connexion.prepareStatement("select category.name from category" +
@@ -25,9 +25,8 @@ public class GameCategoryDAO {
 
             ResultSet rs = sqlCategories.executeQuery();
 
-            if (rs.next()) {
+            while (rs.next()) {
                 Category category = new Category(rs.getString("category.name"));
-                Game game = gameDAO.findById(gameId);
 
                 GameCategory gameCategory = new GameCategory(game, category);
                 gameCategories.add(gameCategory);
