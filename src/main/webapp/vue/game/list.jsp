@@ -11,7 +11,7 @@
                         </h5>
                                                     <c:forEach items="${game.categories}" var="category">
                                                         <span class="badge bg-primary">
-                                                            <c:out value="${category }"></c:out>
+                                                            <c:out value="${category.name }"></c:out>
                                                         </span>
                                                     </c:forEach>
 <%--                        <h6 class="card-subtitle mb-2 text-body-secondary"> By--%>
