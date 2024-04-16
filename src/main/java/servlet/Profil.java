@@ -33,9 +33,11 @@ public class Profil extends HttpServlet {
      * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
      */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-
         request.getRequestDispatcher("vue/user/profil.jsp").forward(request, response);
+    }
+
+    protected void doRedirect(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.getRequestDispatcher("vue/user/login.jsp").forward(request, response);
     }
 
     /**
@@ -67,9 +69,6 @@ public class Profil extends HttpServlet {
         }
         if (request.getParameter("formSubmited").equals("suppAccount")) {
             if (userDao.deactivate(((User) session.getAttribute("currentUser")), request.getParameter("pwdForDeactivation"))) {
-                System.out.println(request.getParameter("pwdForDeactivation"));
-
-                //request.setAttribute("deactivationLogOut", true);
                 request.setAttribute("message", "Votre compte a bien été désactivé !");
                 request.setAttribute("msnType",  "OK");
 
@@ -87,7 +86,7 @@ public class Profil extends HttpServlet {
             if (request.getParameter("newPassword").equals(request.getParameter("confPassword"))) {
 
                 if (BCrypt.checkpw(request.getParameter("oldPassword"),
-                        ((User) session.getAttribute("currentUser")).getPassword()));
+                        ((User) session.getAttribute("currentUser")).getPassword()))
                 {
                     String hashNewPwd = BCrypt.hashpw(request.getParameter("newPassword"), BCrypt.gensalt());
 
@@ -97,7 +96,7 @@ public class Profil extends HttpServlet {
                     request.setAttribute("msnType",  "OK");
                 }
 
-
+                doRedirect(request, response);
             } else {
                 request.setAttribute("msn", "Erreur, les 2 pwd ne correspondent pas!");
                 request.setAttribute("msnType",  "KO");
