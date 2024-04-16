@@ -21,7 +21,7 @@ public class GameDAO {
 
             ResultSet rs = sql.executeQuery();
 
-            if (rs.next()) {
+            while (rs.next()) {
                 ArrayList<GameCategory> gameCategories = gameCategoryDAO.getCategoriesByGameId(rs.getInt("game.id"));
                 ArrayList<Category> categories = new ArrayList<>();
 
