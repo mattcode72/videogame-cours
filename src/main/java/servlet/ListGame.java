@@ -37,6 +37,8 @@ public class ListGame extends HttpServlet {
 
         request.setAttribute("games", gameDao.getAll());
 
+//        System.out.println("games : " + gameDao.getAll());
+
         request.getRequestDispatcher("vue/game/list.jsp").forward(request, response);
     }
 

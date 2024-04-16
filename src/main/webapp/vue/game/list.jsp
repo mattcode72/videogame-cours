@@ -9,11 +9,11 @@
                         <h5 class="card-title">
                             <c:out value="${game.name}"></c:out>
                         </h5>
-                        <h6 class="card-subtitle mb-2 text-body-secondary"> By
-                            <c:out value="${game.developer.name }"></c:out>
-                        </h6>
+<%--                        <h6 class="card-subtitle mb-2 text-body-secondary"> By--%>
+<%--                            <c:out value="${game.developer.name }"></c:out>--%>
+<%--                        </h6>--%>
                         <p class="card-text">
-                            <c:out value="${game.description }"></c:out>
+                            <c:out value="${game }"></c:out>
                         </p>
                         <div>
                             <fmt:formatDate value="${game.release_date}" type="date" dateStyle="full"/>
