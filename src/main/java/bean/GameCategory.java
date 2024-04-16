@@ -7,16 +7,16 @@ public class GameCategory {
     public GameCategory() {
     }
 
-    public GameCategory(int game_id, int category_id) {
-        this.gameId = game_id;
-        this.categoryId = category_id;
+    public GameCategory(int gameId, int categoryId) {
+        this.gameId = gameId;
+        this.categoryId = categoryId;
     }
 
-    public int getGame_id() {
+    public int getGameId() {
         return gameId;
     }
 
-    public void setGame_id(int gameId) {
+    public void setGameId(int gameId) {
         this.gameId = gameId;
     }
 
