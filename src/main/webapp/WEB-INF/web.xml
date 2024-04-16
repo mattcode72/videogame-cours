@@ -6,8 +6,9 @@
 
     <jsp-config>
         <jsp-property-group>
-            <url-pattern>.jsp</url-pattern>
-            <include-prelude>/WEB-INF/jstl.jsp</include-prelude>
+            <url-pattern>/vue/*</url-pattern>
+            <include-prelude>/vue/navbar/header.jsp</include-prelude>
+
         </jsp-property-group>
 
     </jsp-config>
