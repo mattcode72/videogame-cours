@@ -43,6 +43,7 @@ public class GameDAO {
     }
 
     public Game findById(int id) {
+        CategoryDAO categoryDAO = new CategoryDAO();
         try  {
 
             PreparedStatement sql = Database.connexion.prepareStatement("select * from game WHERE game.id=?");
@@ -51,7 +52,13 @@ public class GameDAO {
             ResultSet rs = sql.executeQuery();
 
             if (rs.next()) {
-                ArrayList<GameCategory> categories = gameCategoryDAO.getCategoriesByGameId(rs.getInt("game.id"));
+                ArrayList<GameCategory> gameCategories = gameCategoryDAO.getCategoriesByGameId(rs.getInt("game.id"));
+                ArrayList<Category> categories = new ArrayList<>();
+
+                for (GameCategory gameCategory : gameCategories) {
+                    categories.add(categoryDAO.findById(gameCategory.getCategory_id()));
+                }
+
 
                 return new Game(rs.getString("name"), rs.getString("description"), rs.getDate("release_date"), rs.getInt("price"), categories);
             }
