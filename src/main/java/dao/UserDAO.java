@@ -88,7 +88,7 @@ public class UserDAO {
 
     public User findById(int id) {
         try {
-
+            Database.Connect();
 
             PreparedStatement sql = Database.connexion.prepareStatement("select * from users WHERE users.id=?");
 
