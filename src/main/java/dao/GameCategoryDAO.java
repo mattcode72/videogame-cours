@@ -14,7 +14,7 @@ public class GameCategoryDAO {
         ArrayList<GameCategory> gameCategories = new ArrayList<>();
 
         try {
-            PreparedStatement sqlCategories = Database.connexion.prepareStatement("select category.name from category" +
+            PreparedStatement sqlCategories = Database.connexion.prepareStatement("select category.id ,category.name from category" +
                     " LEFT JOIN game_category ON category.id = game_category.category_id" +
                     " WHERE game_category.game_id = ?");
 
