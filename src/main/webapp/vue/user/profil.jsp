@@ -93,12 +93,16 @@
                 <form method="post">
                     <input type="hidden" class="form-control" name="formSubmited" value="editAccount">
                     <div class="modal-body">
-                        <div class="mb-4">
+                        <div class="mb-3">
+                            <input type="hidden" class="form-control" id="id" name="id"
+                                   value="<c:out value="${currentUser.id }"/>">
+                        </div>
+                        <div class="mb-3">
                             <label class="form-label">Pseudo</label>
                             <input type="text" class="form-control" id="pseudo" name="pseudo"
                                    value="<c:out value="${currentUser.pseudo }"/>">
                         </div>
-                        <div class="mb-4">
+                        <div class="mb-3">
                             <label class="form-label">Email address</label>
                             <input type="email" class="form-control" id="email" name="email"
                                    value="<c:out value="${currentUser.email }"/>">

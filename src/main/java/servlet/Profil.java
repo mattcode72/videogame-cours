@@ -84,12 +84,12 @@ public class Profil extends HttpServlet {
             }
         }
         if (request.getParameter("formSubmited").equals("accountPassword")) {
-            if (request.getParameter("newPwd").equals(request.getParameter("confPwd"))) {
+            if (request.getParameter("newPassword").equals(request.getParameter("confPassword"))) {
 
-                if (BCrypt.checkpw(request.getParameter("oldPwd"),
+                if (BCrypt.checkpw(request.getParameter("oldPassword"),
                         ((User) session.getAttribute("currentUser")).getPassword()));
                 {
-                    String hashNewPwd = BCrypt.hashpw(request.getParameter("newPwd"), BCrypt.gensalt());
+                    String hashNewPwd = BCrypt.hashpw(request.getParameter("newPassword"), BCrypt.gensalt());
 
                     userDao.updatePassword((User) session.getAttribute("currentUser"),hashNewPwd );
                     session.invalidate();
