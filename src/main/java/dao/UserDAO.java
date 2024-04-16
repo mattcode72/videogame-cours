@@ -144,4 +144,30 @@ public class UserDAO {
             return false;
         }
     }
+
+    public boolean deactivate(User user, String password) {
+        try {
+            Database.Connect();
+            PreparedStatement sql = Database.connexion.prepareStatement(
+                    "select * from users where email=?");
+            sql.setString(1, user.getEmail());
+
+            ResultSet rs = sql.executeQuery();
+
+            if (rs.next()) {
+                if (BCrypt.checkpw(password, rs.getString("pwd"))) {
+
+                    sql = Database.connexion.prepareStatement("DELETE FROM users"
+                            + " WHERE id= ?");
+                    sql.setInt(1, user.getId());
+
+                    sql.execute();
+                    return true;
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
 }
