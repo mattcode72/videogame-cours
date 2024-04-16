@@ -17,20 +17,20 @@ public class GameDAO {
 
         try {
             PreparedStatement sql = Database.connexion.prepareStatement("select game.name, game.description, game.release_date, game.price from game" +
-                    "LEFT JOIN game_developer ON game.id = game_developer.game_id" +
-                    "LEFT JOIN developer ON game_developer.developer_id = developer.id" +
-                    "LEFT JOIN game_category ON game.id = game_category.game_id" +
-                    "LEFT JOIN category ON game_category.category_id = category.id" +
-                    "LEFT JOIN game_platform ON game.id = game_platform.game_id" +
-                    "LEFT JOIN platform ON game_platform.platform_id = platform.id" +
-                    "LEFT JOIN game_tag ON game.id = game_tag.game_id" +
-                    "LEFT JOIN tag ON game_tag.tag_id = tag.id" +
-                    "LEFT JOIN game_lang ON game.id = game_lang.game_id" +
-                    "LEFT JOIN lang ON game_lang.lang_id = lang.id" +
-                    "LEFT JOIN game_gamemode ON game.id = game_gamemode.game_id" +
-                    "LEFT JOIN gamemode ON game_gamemode.gamemode_id = gamemode.id" +
-                    "LEFT JOIN review ON game.id = review.game_id" +
-                    "LEFT JOIN media ON game.id = media.game_id");
+                    " LEFT JOIN game_developer ON game.id = game_developer.game_id" +
+                    " LEFT JOIN developer ON game_developer.developer_id = developer.id" +
+                    " LEFT JOIN game_category ON game.id = game_category.game_id" +
+                    " LEFT JOIN category ON game_category.category_id = category.id" +
+                    " LEFT JOIN game_platform ON game.id = game_platform.game_id" +
+                    " LEFT JOIN platform ON game_platform.platform_id = platform.id" +
+                    " LEFT JOIN game_tag ON game.id = game_tag.game_id" +
+                    " LEFT JOIN tag ON game_tag.tag_id = tag.id" +
+                    " LEFT JOIN game_lang ON game.id = game_lang.game_id" +
+                    " LEFT JOIN lang ON game_lang.lang_id = lang.id" +
+                    " LEFT JOIN game_gamemode ON game.id = game_gamemode.game_id" +
+                    " LEFT JOIN gamemode ON game_gamemode.gamemode_id = gamemode.id" +
+                    " LEFT JOIN review ON game.id = review.game_id" +
+                    " LEFT JOIN media ON game.id = media.game_id");
 
             ResultSet rs = sql.executeQuery();
 
