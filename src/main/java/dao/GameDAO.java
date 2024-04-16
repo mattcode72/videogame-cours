@@ -16,7 +16,7 @@ public class GameDAO {
 
 
         try {
-            PreparedStatement sql = Database.connexion.prepareStatement("select game.name, game.description, game.release_date, game.price from game" +
+            PreparedStatement sql = Database.connexion.prepareStatement("select game.id, game.name, game.description, game.release_date, game.price from game" +
                     " LEFT JOIN game_developer ON game.id = game_developer.game_id" +
                     " LEFT JOIN developer ON game_developer.developer_id = developer.id" +
                     " LEFT JOIN game_category ON game.id = game_category.game_id" +
