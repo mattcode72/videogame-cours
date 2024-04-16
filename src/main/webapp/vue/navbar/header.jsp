@@ -18,7 +18,7 @@
 
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container-fluid">
-        <a class="navbar-brand" href="/videogame/">
+        <a class="navbar-brand" href="/videogame_war_exploded/games">
             <img alt="" src="${pageContext.request.contextPath}/assets/img/videogame.jpg" width="75">
         </a>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">

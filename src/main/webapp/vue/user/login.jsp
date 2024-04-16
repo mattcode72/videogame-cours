@@ -6,7 +6,7 @@
     </div>
 
 </c:if>
-
+<title class="text-center">Login</title>
 <div class="container">
     <form method="post">
         <div class="mb-3">
