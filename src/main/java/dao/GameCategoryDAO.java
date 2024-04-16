@@ -18,9 +18,9 @@ public class GameCategoryDAO {
 
         try {
             PreparedStatement sqlCategories = Database.connexion.prepareStatement("select category.name from category" +
-                    "LEFT JOIN game_category ON category.id = game_category.category_id" +
-                    "LEFT JOIN game ON game_category.game_id = game.id" +
-                    "WHERE game.id = ?");
+                    " LEFT JOIN game_category ON category.id = game_category.category_id" +
+                    " LEFT JOIN game ON game_category.game_id = game.id" +
+                    " WHERE game.id = ?");
 
             sqlCategories.setInt(1, gameId);
 
