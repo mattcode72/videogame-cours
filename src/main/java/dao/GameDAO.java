@@ -20,7 +20,9 @@ public class GameDAO {
             ResultSet rs = sql.executeQuery();
 
             if (rs.next()) {
-                Game game = new Game(rs.getInt("game.id"), rs.getString("game.name"), rs.getString("game.description"), rs.getDate("game.release_date"), rs.getInt("game.price"));
+                ArrayList<GameCategory> categories = gameCategoryDAO.getCategoriesByGameId(rs.getInt("game.id"));
+
+                Game game = new Game(rs.getInt("game.id"), rs.getString("game.name"), rs.getString("game.description"), rs.getDate("game.release_date"), rs.getInt("game.price"), categories);
 
                 games.add(game);
             }
@@ -42,7 +44,9 @@ public class GameDAO {
             ResultSet rs = sql.executeQuery();
 
             if (rs.next()) {
-                return new Game(rs.getString("name"), rs.getString("description"), rs.getDate("release_date"), rs.getInt("price"));
+                ArrayList<GameCategory> categories = gameCategoryDAO.getCategoriesByGameId(rs.getInt("game.id"));
+
+                return new Game(rs.getString("name"), rs.getString("description"), rs.getDate("release_date"), rs.getInt("price"), categories);
             }
 
         } catch (Exception e) {

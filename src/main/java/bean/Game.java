@@ -11,24 +11,27 @@ public class Game {
     private String description;
     private Date releaseDate;
     private int price;
+    private ArrayList<GameCategory> categories;
 
 
     public Game() {
     }
 
-    public Game(String name, String description, Date releaseDate, int price) {
+    public Game(String name, String description, Date releaseDate, int price, ArrayList<GameCategory> categories) {
         this.name = name;
         this.description = description;
         this.releaseDate = releaseDate;
         this.price = price;
+        this.categories = categories;
     }
 
-    public Game(int id, String name, String description, Date releaseDate, int price) {
+    public Game(int id, String name, String description, Date releaseDate, int price, ArrayList<GameCategory> categories) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.releaseDate = releaseDate;
         this.price = price;
+        this.categories = categories;
     }
 
     public int getId() {
@@ -69,5 +72,13 @@ public class Game {
 
     public void setPrice(int price) {
         this.price = price;
+    }
+
+    public ArrayList<GameCategory> getCategories() {
+        return categories;
+    }
+
+    public void setCategories(ArrayList<GameCategory> categories) {
+        this.categories = categories;
     }
 }

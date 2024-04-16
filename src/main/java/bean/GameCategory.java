@@ -1,30 +1,30 @@
 package bean;
 
 public class GameCategory {
-    private Game game;
-    private Category category;
+    private int game_id;
+    private int category_id;
 
     public GameCategory() {
     }
 
-    public GameCategory(Game game, Category category) {
-        this.game = game;
-        this.category = category;
+    public GameCategory(int game_id, int category_id) {
+        this.game_id = game_id;
+        this.category_id = category_id;
     }
 
-    public Game getGame() {
-        return game;
+    public int getGame() {
+        return game_id;
     }
 
-    public void setGame(Game game) {
-        this.game = game;
+    public void setGame(int game_id) {
+        this.game_id = game_id;
     }
 
-    public Category getCategory() {
-        return category;
+    public int getCategory() {
+        return category_id;
     }
 
-    public void setCategory(Category category) {
-        this.category = category;
+    public void setCategory(int category_id) {
+        this.category_id = category_id;
     }
 }
