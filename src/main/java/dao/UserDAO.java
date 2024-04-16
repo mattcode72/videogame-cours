@@ -37,7 +37,8 @@ public class UserDAO {
             prepare.setString(1, mail);
             ResultSet rs = prepare.executeQuery();
             if(rs.next()) {
-                if(BCrypt.checkpw(password, rs.getString("pwd"))) {
+                if(BCrypt.checkpw(password, rs.getString("password"))) {
+                    System.out.println("test");
                     return new User(rs.getInt("id"),rs.getString("pseudo"), rs.getString("password"),rs.getString("email"), rs.getBoolean("is_admin"));
                 }
             }

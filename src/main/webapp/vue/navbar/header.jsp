@@ -37,7 +37,7 @@
                         <li class="nav-item dropdown">
 
                             <button type="button" class="btn btn-outline-success dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                                <c:out value="${currentUser.nom} ${currentUser.prenom}"/>
+                                <c:out value="${currentUser.pseudo}"/>
                             </button>
                             <ul class="dropdown-menu">
                                 <li><a class="dropdown-item" href="profil">Mon compte</a></li>
