@@ -8,12 +8,15 @@ import java.util.ArrayList;
 
 public class GameDAO {
 
+    GameCategoryDAO gameCategoryDAO = new GameCategoryDAO();
+
     public ArrayList<Game> getAll() {
         ArrayList<Game> games = new ArrayList<>();
         Database.Connect();
 
+
         try {
-            PreparedStatement sql = Database.connexion.prepareStatement("select game.name, game.description, game.release_date, lang.name from game" +
+            PreparedStatement sql = Database.connexion.prepareStatement("select game.name, game.description, game.release_date, game.price from game" +
                     "LEFT JOIN game_developer ON game.id = game_developer.game_id" +
                     "LEFT JOIN developer ON game_developer.developer_id = developer.id" +
                     "LEFT JOIN game_category ON game.id = game_category.game_id" +
@@ -32,27 +35,41 @@ public class GameDAO {
             ResultSet rs = sql.executeQuery();
 
             if (rs.next()) {
-                Lang lang = new Lang(rs.getString("lang.name"));
-                Platform platform = new Platform(rs.getString("platform.name"));
-                Category category = new Category(rs.getString("category.name"));
-                GameMode gameMode = new GameMode(rs.getString("gamemode.name"));
-                Tag tag = new Tag(rs.getString("tag.name"));
-                Developer developer = new Developer(rs.getString("developer.name"));
+                // On récupère les catégories d'un jeu
+                ArrayList<GameCategory> gameCategories = gameCategoryDAO.getCategoriesByGameId(rs.getInt("game.id"));
+
 
                 Game game = new Game(rs.getString("game.name"),
                         rs.getString("game.description"),
                         rs.getDate("game.release_date"),
-                        lang,
-                        platform,
-                        category,
-                        gameMode,
-                        tag,
-                        developer);
+                        rs.getInt("game.price"),
+                        gameCategories);
 
                 games.add(game);
             }
 
             return games;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public Game findById(int id) {
+        try {
+            Database.Connect();
+
+            PreparedStatement sql = Database.connexion.prepareStatement("select * from game WHERE game.id=?");
+
+            sql.setInt(1, id);
+            ResultSet rs = sql.executeQuery();
+
+            if (rs.next()) {
+                ArrayList<GameCategory> gameCategories = gameCategoryDAO.getCategoriesByGameId(rs.getInt("game.id"));
+
+                return new Game(rs.getString("name"), rs.getString("description"), rs.getDate("release_date"), rs.getInt("price"), gameCategories);
+            }
 
         } catch (Exception e) {
             e.printStackTrace();
