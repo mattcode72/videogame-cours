@@ -32,7 +32,7 @@ public class MediaDAO {
     public ArrayList<Media> getMediasPageByGameId(int gameId, String mediaType) {
         ArrayList<Media> medias = new ArrayList<>();
         try {
-            PreparedStatement sqlMedias = Database.connexion.prepareStatement("select media.id, media.path from media" +
+            PreparedStatement sqlMedias = Database.connexion.prepareStatement("select media.id, media.path, media.is_thumbnail from media" +
                                                                                   " INNER JOIN media_type ON media_type.id = media.media_type_id" +
                                                                                   " where media.game_id = ? AND media_type.name = ? AND media.is_thumbnail = 0");
 
@@ -42,7 +42,7 @@ public class MediaDAO {
             ResultSet rs = sqlMedias.executeQuery();
 
             while (rs.next()) {
-                Media media = new Media(rs.getInt("media.id"), rs.getString("media.filename"), rs.getString("media.path"));
+                Media media = new Media(rs.getInt("media.id"), rs.getBoolean("media.is_thumbnail"), rs.getString("media.path"));
 
                 medias.add(media);
             }
