@@ -30,6 +30,14 @@ public class Review {
         this.user = user;
     }
 
+    public Review(int id, int rating, String content, Date date, User user) {
+        this.id = id;
+        this.rating = rating;
+        this.content = content;
+        this.date = date;
+        this.user = user;
+    }
+
     public int getId() {
         return id;
     }

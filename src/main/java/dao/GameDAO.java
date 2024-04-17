@@ -79,7 +79,23 @@ public class GameDAO {
                     langs.add(gameLang.getLang());
                 }
 
-                return new Game(rs.getString("name"), rs.getString("description"), rs.getDate("release_date"), rs.getInt("price"), categories, images, videos, platforms, langs);
+                ArrayList<GameGameMode> gameGameModes = new GameGameModeDAO().getGameModesByGameId(rs.getInt("game.id"));
+                ArrayList<GameMode> gameModes = new ArrayList<>();
+
+                for (GameGameMode gameGameMode : gameGameModes) {
+                    gameModes.add(gameGameMode.getGameMode());
+                }
+
+                ArrayList<GameDeveloper> gameDevelopers = new GameDeveloperDAO().getDevelopersByGameId(rs.getInt("game.id"));
+                ArrayList<Developer> developers = new ArrayList<>();
+
+                for (GameDeveloper gameDeveloper : gameDevelopers) {
+                    developers.add(gameDeveloper.getDeveloper());
+                }
+
+                ArrayList<Review> reviews = new ReviewDAO().getReviewsByGameId(rs.getInt("game.id"));
+
+                return new Game(rs.getString("name"), rs.getString("description"), rs.getDate("release_date"), rs.getInt("price"), categories, images, videos, platforms, langs, gameModes, developers, reviews);
             }
 
         } catch (Exception e) {

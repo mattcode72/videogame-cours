@@ -17,6 +17,9 @@ public class Game {
     private ArrayList<Media> videos;
     private ArrayList<Platform> platforms;
     private ArrayList<Lang> langs;
+    private ArrayList<GameMode> gameModes;
+    private ArrayList<Developer> developers;
+    private ArrayList<Review> reviews;
 
 
     public Game() {
@@ -41,7 +44,7 @@ public class Game {
         this.thumbnail = thumbnail;
     }
 
-    public Game(String name, String description, Date releaseDate, int price, ArrayList<Category> categories, ArrayList<Media> images, ArrayList<Media> videos, ArrayList<Platform> platforms, ArrayList<Lang> langs) {
+    public Game(String name, String description, Date releaseDate, int price, ArrayList<Category> categories, ArrayList<Media> images, ArrayList<Media> videos, ArrayList<Platform> platforms, ArrayList<Lang> langs, ArrayList<GameMode> gameModes, ArrayList<Developer> developers, ArrayList<Review> reviews) {
         this.name = name;
         this.description = description;
         this.releaseDate = releaseDate;
@@ -51,6 +54,9 @@ public class Game {
         this.videos = videos;
         this.platforms = platforms;
         this.langs = langs;
+        this.gameModes = gameModes;
+        this.developers = developers;
+        this.reviews = reviews;
     }
 
     public int getId() {
@@ -139,5 +145,29 @@ public class Game {
 
     public void setLangs(ArrayList<Lang> langs) {
         this.langs = langs;
+    }
+
+    public ArrayList<GameMode> getGameModes() {
+        return gameModes;
+    }
+
+    public void setGameModes(ArrayList<GameMode> gameModes) {
+        this.gameModes = gameModes;
+    }
+
+    public ArrayList<Developer> getGameDevelopers() {
+        return developers;
+    }
+
+    public void setGameDevelopers(ArrayList<Developer> developers) {
+        this.developers = developers;
+    }
+
+    public ArrayList<Review> getReviews() {
+        return reviews;
+    }
+
+    public void setReviews(ArrayList<Review> reviews) {
+        this.reviews = reviews;
     }
 }
