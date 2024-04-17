@@ -13,7 +13,7 @@ public class MediaDAO {
         try {
             PreparedStatement sqlMedias = Database.connexion.prepareStatement("select media.id, media.filename, media.path from media" +
                                                                                   " INNER JOIN media_type ON media_type.id = media.media_type_id" +
-                                                                                  " where game_media.game_id = ? AND media_type.name = 'image'");
+                                                                                  " where media.game_id = ? AND media_type.name = 'image'");
 
             sqlMedias.setInt(1, gameId);
 
@@ -34,7 +34,7 @@ public class MediaDAO {
         try {
             PreparedStatement sqlMedias = Database.connexion.prepareStatement("select media.id, media.filename, media.path from media" +
                                                                                   " INNER JOIN media_type ON media_type.id = media.media_type_id" +
-                                                                                  " where game_media.game_id = ? AND media_type.name = ?");
+                                                                                  " where media.game_id = ? AND media_type.name = ?");
 
             sqlMedias.setInt(1, gameId);
             sqlMedias.setString(2, mediaType);
