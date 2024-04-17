@@ -2,6 +2,7 @@ package servlet;
 
 import java.io.IOException;
 
+import dao.CategoryDAO;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -34,8 +35,10 @@ public class ListGame extends HttpServlet {
      */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         GameDAO gameDao = new GameDAO();
+        CategoryDAO categoryDao = new CategoryDAO();
 
         request.setAttribute("games", gameDao.getAll());
+        request.setAttribute("categories", categoryDao.getAll());
 
         request.getRequestDispatcher("vue/game/list.jsp").forward(request, response);
     }
