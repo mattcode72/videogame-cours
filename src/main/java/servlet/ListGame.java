@@ -44,32 +44,16 @@ public class ListGame extends HttpServlet {
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        HttpSession  session = request.getSession(true);
-        //PANIER
-        //Verifie si le panier n'existe pas
-//        if(session.getAttribute("order")==null) {
-//            OrderDAO order_temp=new OrderDAO();
-//            session.setAttribute( "order", order_temp );
-//        }
-//
-//        if (request.getParameter("addOrder") != null ) {
-//            //Recup panier depuis la session - ligne 56
-//            OrderDAO orderDetails= (OrderDAO) session.getAttribute("order");
-//
-//            try {
-//                GameDAO gameDao = new GameDAO();
-//                Game game = gameDao.findById(Integer.parseInt(request.getParameter("addOrder")));
-//                Order order = new Order(game,1);
-//                orderDetails.addGame(order);
-//                session.setAttribute("order", orderDetails );
-//
-//            } catch (NumberFormatException e) {
-//                // TODO Auto-generated catch block
-//                e.printStackTrace();
-//            }
-//        }
-        //FIN PANIER
-        doGet(request, response);
+        CategoryDAO categoryDao = new CategoryDAO();
+        GameDAO gameDao = new GameDAO();
+
+        int idCategory = Integer.parseInt(request.getParameter("filterCategory"));
+        int idPlatform = Integer.parseInt(request.getParameter("filterPlatform"));
+
+        request.setAttribute("games", gameDao.getGamesByFilter(idCategory, idPlatform));
+        request.setAttribute("categories", categoryDao.getAll());
+
+        request.getRequestDispatcher("vue/game/list.jsp").forward(request, response);
     }
 
 }

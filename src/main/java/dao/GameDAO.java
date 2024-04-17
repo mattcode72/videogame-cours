@@ -46,36 +46,24 @@ public class GameDAO {
     }
 
 
-    public ArrayList<Game> getGamesByCategoryId(int categoryId) {
-        ArrayList<Game> games = new ArrayList<>();
+    public ArrayList<Game> getGamesByFilter(int categoryId, int platformId) {
+        ArrayList<Game> games;
         Database.Connect();
 
         CategoryDAO categoryDAO = new CategoryDAO();
+        PlatformDAO platformDAO = new PlatformDAO();
 
         try {
-            PreparedStatement sql = Database.connexion.prepareStatement("select game.id, game.name, game.description, game.release_date, game.price from game" +
-                                                                            " INNER JOIN game_category ON game.id = game_category.game_id" +
-                                                                            " WHERE game_category.category_id = ?");
+            games = getAll();
 
-            sql.setInt(1, categoryId);
-
-            ResultSet rs = sql.executeQuery();
-
-            while (rs.next()) {
-                ArrayList<GameCategory> gameCategories = gameCategoryDAO.getCategoriesByGameId(rs.getInt("game.id"));
-
-                ArrayList<Category> categories = new ArrayList<>();
-
-                for (GameCategory gameCategory : gameCategories) {
-                    categories.add(categoryDAO.findById(gameCategory.getCategory().getId()));
-                }
-
-                Media thumbnail = new MediaDAO().getThumbnailByGameId(rs.getInt("game.id"));
-
-                Game game = new Game(rs.getInt("game.id"), rs.getString("game.name"), rs.getString("game.description"), rs.getDate("game.release_date"), rs.getInt("game.price"), categories, thumbnail);
-
-                games.add(game);
+            if (categoryId != 0) {
+                games.removeIf(game -> !game.getCategories().contains(categoryDAO.findById(categoryId)));
             }
+            if (platformId != 0) {
+                games.removeIf(game -> !game.getPlatforms().contains(platformDAO.findById(platformId)));
+            }
+
+            System.out.println(games);
 
             return games;
 
