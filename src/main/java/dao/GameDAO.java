@@ -24,13 +24,10 @@ public class GameDAO {
             while (rs.next()) {
                 ArrayList<GameCategory> gameCategories = gameCategoryDAO.getCategoriesByGameId(rs.getInt("game.id"));
 
-                System.out.println("gameCategories: " + gameCategories);
-
                 ArrayList<Category> categories = new ArrayList<>();
 
                 for (GameCategory gameCategory : gameCategories) {
                     categories.add(categoryDAO.findById(gameCategory.getCategory().getId()));
-                    System.out.println(gameCategory.getCategory().getId());
                 }
 
                 Media thumbnail = new MediaDAO().getThumbnailByGameId(rs.getInt("game.id"));
