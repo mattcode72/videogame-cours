@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import dao.CategoryDAO;
+import dao.PlatformDAO;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -37,9 +38,11 @@ public class ListGame extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         GameDAO gameDao = new GameDAO();
         CategoryDAO categoryDao = new CategoryDAO();
+        PlatformDAO platformDao = new PlatformDAO();
 
         request.setAttribute("games", gameDao.getAll());
         request.setAttribute("categories", categoryDao.getAll());
+        request.setAttribute("platforms", platformDao.getAll());
 
         request.getRequestDispatcher("vue/game/list.jsp").forward(request, response);
     }
@@ -47,12 +50,14 @@ public class ListGame extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         CategoryDAO categoryDao = new CategoryDAO();
         GameDAO gameDao = new GameDAO();
+        PlatformDAO platformDao = new PlatformDAO();
 
         int idCategory = Integer.parseInt(request.getParameter("filterCategory"));
         int idPlatform = Integer.parseInt(request.getParameter("filterPlatform"));
 
         request.setAttribute("games", gameDao.getGamesByFilter(idCategory, idPlatform));
         request.setAttribute("categories", categoryDao.getAll());
+        request.setAttribute("platforms", platformDao.getAll());
 
         request.getRequestDispatcher("vue/game/list.jsp").forward(request, response);
     }

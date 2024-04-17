@@ -16,7 +16,7 @@ public class CategoryDAO {
             ResultSet rs = sql.executeQuery();
 
             if (rs.next()) {
-                return new Category(rs.getString("name"));
+                return new Category(rs.getInt("id"), rs.getString("name"));
             }
 
         } catch (Exception e) {
