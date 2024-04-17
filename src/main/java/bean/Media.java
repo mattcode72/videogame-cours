@@ -1,33 +1,35 @@
 package bean;
 
+import com.oracle.wls.shaded.org.apache.xpath.operations.Bool;
+
 public class Media {
     private int id;
-    private String filename;
     private String path;
+    private Boolean isThumbnail;
     private Game game;
     private MediaType mediaType;
 
     public Media() {
     }
 
-    public Media(String filename, String path, Game game, MediaType mediaType) {
-        this.filename = filename;
+    public Media(Boolean isThumbnail, String path, Game game, MediaType mediaType) {
+        this.isThumbnail = isThumbnail;
         this.path = path;
         this.game = game;
         this.mediaType = mediaType;
     }
 
-    public Media(int id, String filename, String path, Game game, MediaType mediaType) {
+    public Media(int id, Boolean isThumbnail, String path, Game game, MediaType mediaType) {
         this.id = id;
-        this.filename = filename;
+        this.isThumbnail = isThumbnail;
         this.path = path;
         this.game = game;
         this.mediaType = mediaType;
     }
 
-    public Media(int id, String filename, String path) {
+    public Media(int id, Boolean isThumbnail, String path) {
         this.id = id;
-        this.filename = filename;
+        this.isThumbnail = isThumbnail;
         this.path = path;
     }
 
@@ -39,12 +41,12 @@ public class Media {
         this.id = id;
     }
 
-    public String getFilename() {
-        return filename;
+    public Boolean getThumbnail() {
+        return isThumbnail;
     }
 
-    public void setFilename(String filename) {
-        this.filename = filename;
+    public void setThumbnail(Boolean isThumbnail) {
+        this.isThumbnail = isThumbnail;
     }
 
     public String getPath() {
