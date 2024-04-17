@@ -155,11 +155,11 @@ public class Game {
         this.gameModes = gameModes;
     }
 
-    public ArrayList<Developer> getGameDevelopers() {
+    public ArrayList<Developer> getDevelopers() {
         return developers;
     }
 
-    public void setGameDevelopers(ArrayList<Developer> developers) {
+    public void setDevelopers(ArrayList<Developer> developers) {
         this.developers = developers;
     }
 
