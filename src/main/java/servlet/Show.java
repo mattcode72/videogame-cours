@@ -1,6 +1,9 @@
 package servlet;
 
 import java.io.IOException;
+
+import bean.Developer;
+import bean.GameDeveloper;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -30,12 +33,11 @@ public class Show extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         System.out.println(request.getParameter("id"));
 
-        //COnvertir le request.getParameter() en int
+        //Convertir le request.getParameter() en int
         int id = Integer.parseInt(request.getParameter("id"));
 
         GameDAO gameDao = new GameDAO();
         request.setAttribute("game", gameDao.findById(id));
-
         request.getRequestDispatcher("vue/game/show.jsp").forward(request, response);
     }
 }

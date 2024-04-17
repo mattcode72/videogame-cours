@@ -1,6 +1,23 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <div class="container">
+
+    <form method="post" action="">
+        <div class="row">
+            <div class="col-4">
+                <select name="filterCategory">
+                    <c:forEach items="${categories}" var="category">
+                        <option value="<c:out value="${category.id}"></c:out>">
+                            <c:out value="${category.name}"></c:out>
+                        </option>
+                    </c:forEach>
+                </select>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Rechercher</button>
+    </form>
+
+
     <div class="row row-cols-1 row-cols-md-3 g-4">
         <c:forEach items="${games}" var="game">
             <div class="col">
