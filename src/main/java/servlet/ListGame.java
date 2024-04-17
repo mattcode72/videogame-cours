@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import dao.CategoryDAO;
+import dao.LangDAO;
 import dao.PlatformDAO;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -24,6 +25,11 @@ import dao.GameDAO;
 public class ListGame extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
+    GameDAO gameDao = new GameDAO();
+    CategoryDAO categoryDao = new CategoryDAO();
+    PlatformDAO platformDao = new PlatformDAO();
+    LangDAO langDao = new LangDAO();
+
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -36,28 +42,24 @@ public class ListGame extends HttpServlet {
      * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
      */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        GameDAO gameDao = new GameDAO();
-        CategoryDAO categoryDao = new CategoryDAO();
-        PlatformDAO platformDao = new PlatformDAO();
-
         request.setAttribute("games", gameDao.getAll());
         request.setAttribute("categories", categoryDao.getAll());
         request.setAttribute("platforms", platformDao.getAll());
+        request.setAttribute("langs", langDao.getAll());
 
         request.getRequestDispatcher("vue/game/list.jsp").forward(request, response);
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        CategoryDAO categoryDao = new CategoryDAO();
-        GameDAO gameDao = new GameDAO();
-        PlatformDAO platformDao = new PlatformDAO();
-
         int idCategory = Integer.parseInt(request.getParameter("filterCategory"));
         int idPlatform = Integer.parseInt(request.getParameter("filterPlatform"));
+        int idLang = Integer.parseInt(request.getParameter("filterLang"));
+        String search = request.getParameter("filterName");
 
-        request.setAttribute("games", gameDao.getGamesByFilter(idCategory, idPlatform));
+        request.setAttribute("games", gameDao.getGamesByFilter(idCategory, idPlatform, idLang));
         request.setAttribute("categories", categoryDao.getAll());
         request.setAttribute("platforms", platformDao.getAll());
+        request.setAttribute("langs", langDao.getAll());
 
         request.getRequestDispatcher("vue/game/list.jsp").forward(request, response);
     }

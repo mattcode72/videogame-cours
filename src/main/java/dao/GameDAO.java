@@ -39,9 +39,16 @@ public class GameDAO {
                     platforms.add(gamePlatform.getPlatform());
                 }
 
+                ArrayList<GameLang> gameLangs = new GameLangDAO().getLangsByGameId(rs.getInt("game.id"));
+                ArrayList<Lang> langs = new ArrayList<>();
+
+                for (GameLang gameLang : gameLangs) {
+                    langs.add(gameLang.getLang());
+                }
+
                 Media thumbnail = new MediaDAO().getThumbnailByGameId(rs.getInt("game.id"));
 
-                Game game = new Game(rs.getInt("game.id"), rs.getString("game.name"), rs.getString("game.description"), rs.getDate("game.release_date"), rs.getInt("game.price"), categories, platforms, thumbnail);
+                Game game = new Game(rs.getInt("game.id"), rs.getString("game.name"), rs.getString("game.description"), rs.getDate("game.release_date"), rs.getInt("game.price"), categories, platforms, langs, thumbnail);
 
                 games.add(game);
             }
@@ -55,7 +62,7 @@ public class GameDAO {
     }
 
 
-    public ArrayList<Game> getGamesByFilter(int categoryId, int platformId) {
+    public ArrayList<Game> getGamesByFilter(int categoryId, int platformId, int langId) {
         Database.Connect();
 
         Stream<Game> gamesFiltered = getAll().stream();
@@ -65,6 +72,9 @@ public class GameDAO {
         }
         if (platformId != 0) {
             gamesFiltered = gamesFiltered.filter(game -> game.getPlatforms().stream().anyMatch(platform -> platform.getId() == platformId));
+        }
+        if (langId != 0) {
+            gamesFiltered = gamesFiltered.filter(game -> game.getLangs().stream().anyMatch(lang -> lang.getId() == langId));
         }
 
         return gamesFiltered.collect(Collectors.toCollection(ArrayList<Game>::new));

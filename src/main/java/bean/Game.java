@@ -34,7 +34,7 @@ public class Game {
         this.thumbnail = thumbnail;
     }
 
-    public Game(int id, String name, String description, Date releaseDate, int price, ArrayList<Category> categories, ArrayList<Platform> platforms, Media thumbnail) {
+    public Game(int id, String name, String description, Date releaseDate, int price, ArrayList<Category> categories, ArrayList<Platform> platforms, ArrayList<Lang> langs, Media thumbnail) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -42,6 +42,7 @@ public class Game {
         this.price = price;
         this.categories = categories;
         this.platforms = platforms;
+        this.langs = langs;
         this.thumbnail = thumbnail;
     }
 
