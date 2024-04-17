@@ -12,14 +12,16 @@ public class GameDeveloperDAO {
     public ArrayList<GameDeveloper> getDevelopersByGameId(int gameId) {
         ArrayList<GameDeveloper> gameDevelopers = new ArrayList<>();
         try {
-            PreparedStatement sql = Database.connexion.prepareStatement("select * from game_developer where game_id = ?");
+            PreparedStatement sql = Database.connexion.prepareStatement("select * from game_developer " +
+                                                            " inner join developer on game_developer.developer_id = developer.id " +
+                                                            " where game_id = ?");
 
             sql.setInt(1, gameId);
 
             ResultSet rs = sql.executeQuery();
 
             while (rs.next()) {
-                Developer developer = new Developer(rs.getInt("id"), rs.getString("name"));
+                Developer developer = new Developer(rs.getInt("developer.id"), rs.getString("developer.name"));
 
                 GameDeveloper gameDeveloper = new GameDeveloper(developer);
 

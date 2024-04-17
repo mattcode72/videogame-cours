@@ -12,14 +12,16 @@ public class GameGameModeDAO {
     public ArrayList<GameGameMode> getGameModesByGameId(int gameId) {
         ArrayList<GameGameMode> gameGameModes = new ArrayList<>();
         try {
-            PreparedStatement sql = Database.connexion.prepareStatement("select * from game_gamemode where game_id = ?");
+            PreparedStatement sql = Database.connexion.prepareStatement("select * from game_gamemode " +
+                                                                " inner join gamemode on game_gamemode.gamemode_id = gamemode.id " +
+                                                                " where game_id = ?");
 
             sql.setInt(1, gameId);
 
             ResultSet rs = sql.executeQuery();
 
             while (rs.next()) {
-                GameMode gameMode = new GameMode(rs.getInt("id"), rs.getString("name"));
+                GameMode gameMode = new GameMode(rs.getInt("gamemode.id"), rs.getString("gamemode.name"));
 
                 GameGameMode gameGameMode = new GameGameMode(gameMode);
 

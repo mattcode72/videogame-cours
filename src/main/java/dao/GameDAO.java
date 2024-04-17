@@ -45,6 +45,87 @@ public class GameDAO {
         return null;
     }
 
+
+    public ArrayList<Game> getGamesByCategoryId(int categoryId) {
+        ArrayList<Game> games = new ArrayList<>();
+        Database.Connect();
+
+        CategoryDAO categoryDAO = new CategoryDAO();
+
+        try {
+            PreparedStatement sql = Database.connexion.prepareStatement("select game.id, game.name, game.description, game.release_date, game.price from game" +
+                                                                            " INNER JOIN game_category ON game.id = game_category.game_id" +
+                                                                            " WHERE game_category.category_id = ?");
+
+            sql.setInt(1, categoryId);
+
+            ResultSet rs = sql.executeQuery();
+
+            while (rs.next()) {
+                ArrayList<GameCategory> gameCategories = gameCategoryDAO.getCategoriesByGameId(rs.getInt("game.id"));
+
+                ArrayList<Category> categories = new ArrayList<>();
+
+                for (GameCategory gameCategory : gameCategories) {
+                    categories.add(categoryDAO.findById(gameCategory.getCategory().getId()));
+                }
+
+                Media thumbnail = new MediaDAO().getThumbnailByGameId(rs.getInt("game.id"));
+
+                Game game = new Game(rs.getInt("game.id"), rs.getString("game.name"), rs.getString("game.description"), rs.getDate("game.release_date"), rs.getInt("game.price"), categories, thumbnail);
+
+                games.add(game);
+            }
+
+            return games;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+
+    public ArrayList<Game> getGamesByPlatformId(int platformId) {
+        ArrayList<Game> games = new ArrayList<>();
+        Database.Connect();
+
+        CategoryDAO categoryDAO = new CategoryDAO();
+
+        try {
+            PreparedStatement sql = Database.connexion.prepareStatement("select game.id, game.name, game.description, game.release_date, game.price from game" +
+                                                                            " INNER JOIN game_platform ON game.id = game_platform.game_id" +
+                                                                            " WHERE game_platform.platform_id = ?");
+
+            sql.setInt(1, platformId);
+
+            ResultSet rs = sql.executeQuery();
+
+            while (rs.next()) {
+                ArrayList<GameCategory> gameCategories = gameCategoryDAO.getCategoriesByGameId(rs.getInt("game.id"));
+
+                ArrayList<Category> categories = new ArrayList<>();
+
+                for (GameCategory gameCategory : gameCategories) {
+                    categories.add(categoryDAO.findById(gameCategory.getCategory().getId()));
+                }
+
+                Media thumbnail = new MediaDAO().getThumbnailByGameId(rs.getInt("game.id"));
+
+                Game game = new Game(rs.getInt("game.id"), rs.getString("game.name"), rs.getString("game.description"), rs.getDate("game.release_date"), rs.getInt("game.price"), categories, thumbnail);
+
+                games.add(game);
+            }
+
+            return games;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+
     public Game findById(int id) {
         CategoryDAO categoryDAO = new CategoryDAO();
         try  {

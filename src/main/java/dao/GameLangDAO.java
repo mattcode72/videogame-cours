@@ -12,14 +12,16 @@ public class GameLangDAO {
     public ArrayList<GameLang> getLangsByGameId(int gameId) {
         ArrayList<GameLang> gameLangs = new ArrayList<>();
         try {
-            PreparedStatement sql = Database.connexion.prepareStatement("select * from game_lang where game_id = ?");
+            PreparedStatement sql = Database.connexion.prepareStatement("select * from game_lang " +
+                                                " inner join lang on game_lang.lang_id = lang.id " +
+                                                " where game_id = ?");
 
             sql.setInt(1, gameId);
 
             ResultSet rs = sql.executeQuery();
 
             while (rs.next()) {
-                Lang lang = new Lang(rs.getInt("id"), rs.getString("name"));
+                Lang lang = new Lang(rs.getInt("lang.id"), rs.getString("lang.name"));
 
                 GameLang gameLang = new GameLang(lang);
 
