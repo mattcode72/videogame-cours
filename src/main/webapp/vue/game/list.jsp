@@ -41,23 +41,6 @@
             <div class="col-2">
                 <div class="row">
                     <div class="col-12">
-                        <label for="filterTag">Tags :</label>
-                    </div>
-                    <div class="col-12" style="margin-top: 10px;">
-                        <select name="filterTag">
-                            <option value="0"></option>
-                            <c:forEach items="${tags}" var="tag">
-                                <option value="<c:out value="${tag.id}"></c:out>">
-                                    <c:out value="${tag.name}"></c:out>
-                                </option>
-                            </c:forEach>
-                        </select>
-                    </div>
-                </div>
-            </div>
-            <div class="col-2">
-                <div class="row">
-                    <div class="col-12">
                         <label for="filterLang">Langue :</label>
                     </div>
                     <div class="col-12" style="margin-top: 10px;">
