@@ -62,7 +62,7 @@ public class GameDAO {
     }
 
 
-    public ArrayList<Game> getGamesByFilter(int categoryId, int platformId, int langId) {
+    public ArrayList<Game> getGamesByFilter(int categoryId, int platformId, int langId, String search) {
         Database.Connect();
 
         Stream<Game> gamesFiltered = getAll().stream();
@@ -75,6 +75,9 @@ public class GameDAO {
         }
         if (langId != 0) {
             gamesFiltered = gamesFiltered.filter(game -> game.getLangs().stream().anyMatch(lang -> lang.getId() == langId));
+        }
+        if (!search.isEmpty()) {
+            gamesFiltered = gamesFiltered.filter(game -> game.getName().toLowerCase().contains(search.toLowerCase()));
         }
 
         return gamesFiltered.collect(Collectors.toCollection(ArrayList<Game>::new));

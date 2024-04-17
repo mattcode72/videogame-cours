@@ -56,7 +56,8 @@ public class ListGame extends HttpServlet {
         int idLang = Integer.parseInt(request.getParameter("filterLang"));
         String search = request.getParameter("filterName");
 
-        request.setAttribute("games", gameDao.getGamesByFilter(idCategory, idPlatform, idLang));
+
+        request.setAttribute("games", gameDao.getGamesByFilter(idCategory, idPlatform, idLang, search));
         request.setAttribute("categories", categoryDao.getAll());
         request.setAttribute("platforms", platformDao.getAll());
         request.setAttribute("langs", langDao.getAll());
