@@ -16,6 +16,7 @@ public class Game {
     private ArrayList<Media> images;
     private ArrayList<Media> videos;
     private ArrayList<Platform> platforms;
+    private ArrayList<Lang> langs;
 
 
     public Game() {
@@ -40,7 +41,7 @@ public class Game {
         this.thumbnail = thumbnail;
     }
 
-    public Game(String name, String description, Date releaseDate, int price, ArrayList<Category> categories, ArrayList<Media> images, ArrayList<Media> videos, ArrayList<Platform> platforms) {
+    public Game(String name, String description, Date releaseDate, int price, ArrayList<Category> categories, ArrayList<Media> images, ArrayList<Media> videos, ArrayList<Platform> platforms, ArrayList<Lang> langs) {
         this.name = name;
         this.description = description;
         this.releaseDate = releaseDate;
@@ -49,6 +50,7 @@ public class Game {
         this.images = images;
         this.videos = videos;
         this.platforms = platforms;
+        this.langs = langs;
     }
 
     public int getId() {
@@ -129,5 +131,13 @@ public class Game {
 
     public void setPlatforms(ArrayList<Platform> platforms) {
         this.platforms = platforms;
+    }
+
+    public ArrayList<Lang> getLangs() {
+        return langs;
+    }
+
+    public void setLangs(ArrayList<Lang> langs) {
+        this.langs = langs;
     }
 }
