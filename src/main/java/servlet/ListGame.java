@@ -1,6 +1,7 @@
 package servlet;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import dao.CategoryDAO;
 import jakarta.servlet.ServletException;
@@ -45,6 +46,7 @@ public class ListGame extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession  session = request.getSession(true);
+        System.out.println(request.getParameter("filterCategory"));
         //PANIER
         //Verifie si le panier n'existe pas
 //        if(session.getAttribute("order")==null) {
