@@ -61,7 +61,7 @@
                         <label for="filterName">Nom :</label>
                     </div>
                     <div class="col-12" style="margin-top: 10px;">
-                        <input type="text" name="filterPrice">
+                        <input type="text" name="filterName">
                     </div>
                 </div>
             </div>
