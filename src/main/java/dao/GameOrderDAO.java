@@ -43,8 +43,8 @@ public class GameOrderDAO {
     }
 
 
-    public ArrayList<Game> getGamesInCart(Order order) {
-        ArrayList<Game> gamesInCart = new ArrayList<>();
+    public ArrayList<GameOrder> getGamesInCart(Order order) {
+        ArrayList<GameOrder> gamesInCart = new ArrayList<>();
         try {
             PreparedStatement sql = Database.connexion.prepareStatement("SELECT * FROM game_orders WHERE orders_id = ? AND is_ordered = 0");
 
@@ -55,7 +55,9 @@ public class GameOrderDAO {
             while (rs.next()) {
                 Game game = new GameDAO().findById(rs.getInt("game_id"));
 
-                gamesInCart.add(game);
+                GameOrder gameOrder = new GameOrder(game, order, rs.getInt("quantity"));
+
+                gamesInCart.add(gameOrder);
             }
 
             return gamesInCart;

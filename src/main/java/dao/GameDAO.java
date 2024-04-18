@@ -84,6 +84,7 @@ public class GameDAO {
 
 
     public Game findById(int id) {
+        System.out.println(id);
         CategoryDAO categoryDAO = new CategoryDAO();
         try  {
 
@@ -133,7 +134,7 @@ public class GameDAO {
 
                 ArrayList<Review> reviews = new ReviewDAO().getReviewsByGameId(rs.getInt("game.id"));
 
-                return new Game(rs.getString("name"), rs.getString("description"), rs.getDate("release_date"), rs.getInt("price"), categories, images, videos, platforms, langs, gameModes, developers, reviews);
+                return new Game(rs.getInt("id"), rs.getString("name"), rs.getString("description"), rs.getDate("release_date"), rs.getInt("price"), categories, images, videos, platforms, langs, gameModes, developers, reviews);
             }
 
         } catch (Exception e) {

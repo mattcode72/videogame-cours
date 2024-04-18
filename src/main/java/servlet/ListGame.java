@@ -57,7 +57,11 @@ public class ListGame extends HttpServlet {
 
         if (action.equals("addToCart")) {
             String idGameToAdd = request.getParameter("addCart");
+            int idGame = Integer.parseInt(idGameToAdd);
             System.out.println("idGameToAdd : " + idGameToAdd);
+
+            System.out.println("idGameToAdd : " + Integer.parseInt(idGameToAdd));
+
             User userConnected = (User) session.getAttribute("currentUser");
 
             // On vérifie si une commande est déjà en cours
@@ -66,7 +70,7 @@ public class ListGame extends HttpServlet {
                 orderDao.createOrder(userConnected);
             }
             Order currentOrder = orderDao.getCurrentOrder(userConnected);
-            Game game = gameDao.findById(Integer.parseInt(idGameToAdd));
+            Game game = gameDao.findById(idGame);
 
             gameOrderDao.addGame(game, currentOrder);
 

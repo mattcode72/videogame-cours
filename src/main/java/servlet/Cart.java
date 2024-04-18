@@ -37,6 +37,12 @@ public class Cart extends HttpServlet {
      * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
      */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession session = request.getSession(true);
+
+        Order currentOrder = orderDao.getCurrentOrder((User) session.getAttribute("currentUser"));
+
+        request.setAttribute("items", gameOrderDao.getGamesInCart(currentOrder));
+
         request.getRequestDispatcher("vue/cart/show.jsp").forward(request, response);
     }
 
@@ -44,10 +50,6 @@ public class Cart extends HttpServlet {
      * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
      */
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        HttpSession session = request.getSession(true);
 
-        Order currentOrder = orderDao.getCurrentOrder((User) session.getAttribute("currentUser"));
-
-        request.setAttribute("items", gameOrderDao.getGamesInCart(currentOrder));
     }
 }

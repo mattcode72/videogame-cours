@@ -9,7 +9,7 @@
     </thead>
     <tbody>
     <tbody>
-    <c:forEach items="${cart.items}" var="item">
+    <c:forEach items="${items}" var="item">
         <tr>
             <td><c:out value="${item.game.name}"/></td>
             <td><c:out value="${item.game.price}"/></td>
@@ -20,7 +20,7 @@
                             <i class="fa-sharp fa-solid fa-minus"></i>
                         </button>
                     </form>
-                    <span ><c:out value="${item.qty}"/></span>
+                    <span ><c:out value="${item.quantity}"/></span>
                     <form method="post">
                         <button class="btn btn-outline-success rounded-circle" name="more" value="${item.game.id}">
                             <i class="fa-sharp fa-solid fa-plus"></i>
@@ -48,10 +48,10 @@
 </form>
 
 <div class="col-md-4 command">
-    <button class="btn btn-outline-success">
-        <i class="fa-regular fa-credit-card"></i>
-        Total price: <c:out value="${cart.total()}"/> dollars
-    </button>
+<%--    <button class="btn btn-outline-success">--%>
+<%--        <i class="fa-regular fa-credit-card"></i>--%>
+<%--        Total price: <c:out value="${cart.total()}"/> dollars--%>
+<%--    </button>--%>
     <h4>Passage � la caisse </h4>
     <a href="command">
         <button class="btn btn-warning">

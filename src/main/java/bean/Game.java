@@ -46,7 +46,8 @@ public class Game {
         this.thumbnail = thumbnail;
     }
 
-    public Game(String name, String description, Date releaseDate, int price, ArrayList<Category> categories, ArrayList<Media> images, ArrayList<Media> videos, ArrayList<Platform> platforms, ArrayList<Lang> langs, ArrayList<GameMode> gameModes, ArrayList<Developer> developers, ArrayList<Review> reviews) {
+    public Game(int id,String name, String description, Date releaseDate, int price, ArrayList<Category> categories, ArrayList<Media> images, ArrayList<Media> videos, ArrayList<Platform> platforms, ArrayList<Lang> langs, ArrayList<GameMode> gameModes, ArrayList<Developer> developers, ArrayList<Review> reviews) {
+        this.id = id;
         this.name = name;
         this.description = description;
         this.releaseDate = releaseDate;
