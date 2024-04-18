@@ -28,12 +28,13 @@ public class GameOrderDAO {
         }
     }
 
-    public void removeGame(Game gameToRemove, User user) {
+    public void removeGame(Game gameToRemove, Order order) {
+
         try {
-            PreparedStatement sql = Database.connexion.prepareStatement("DELETE FROM game_orders WHERE game_id = ? and users_id = ?");
+            PreparedStatement sql = Database.connexion.prepareStatement("DELETE FROM game_orders WHERE game_id = ? and orders_id = ?");
 
             sql.setInt(1, gameToRemove.getId());
-            sql.setInt(2, user.getId());
+            sql.setInt(2, order.getId());
 
             sql.executeUpdate();
 

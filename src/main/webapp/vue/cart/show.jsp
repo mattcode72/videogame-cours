@@ -29,7 +29,7 @@
                 </div>
             </td>
             <td>
-                <form method="post">
+                <form method="post" action="">
                     <button class="btn btn-outline-danger rounded-circle" name="deleteItem" value="${item.game.id}">
                         <i class="fa-sharp fa-solid fa-times"></i>
                     </button>
