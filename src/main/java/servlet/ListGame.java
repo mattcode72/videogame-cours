@@ -55,20 +55,20 @@ public class ListGame extends HttpServlet {
         String action = request.getParameter("action");
 
         if (action.equals("addToCart")) {
-            if(session.getAttribute("panier")==null) {
+            if(session.getAttribute("cart")==null) {
                 CartDAO cart_temp =new CartDAO();
                 session.setAttribute( "cart", cart_temp );
             }
 
-            if (request.getParameter("addPanier") != null ) {
+            if (request.getParameter("addCart") != null ) {
                 //Recup panier depuis la session - ligne 56
                 CartDAO cartDetails= (CartDAO) session.getAttribute("cart");
 
                 try {
                     GameDAO gameDao = new GameDAO();
-                    Game game = gameDAO.findById(Integer.parseInt(request.getParameter("addPanier")));
+                    Game game = gameDAO.findById(Integer.parseInt(request.getParameter("addCart")));
                     Cart cart = new Cart(game,1);
-                    cartDetails.ajouterArticle(cart);
+                    cartDetails.addGame(cart);
                     session.setAttribute("cart", cartDetails );
 
                 } catch (NumberFormatException e) {

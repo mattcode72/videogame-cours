@@ -90,7 +90,7 @@
                             <form method="post" action="">
                                 <input type="hidden" name="action" value="addToCart">
                                 <button type="submit" class="btn btn-sm btn-outline-success rounded-pill"
-                                    name="addPanier" value="${game.id}">
+                                    name="addCart" value="${game.id}">
                                     <i class="fa fa-cart-plus"></i>
                                 </button>
                             </form>
