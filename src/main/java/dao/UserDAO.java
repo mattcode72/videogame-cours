@@ -47,6 +47,24 @@ public class UserDAO {
         return null;
     }
 
+    public User loginAdmin(String mail, String password) {
+        Database.Connect();
+
+        try {
+            PreparedStatement prepare = Database.connexion.prepareStatement("select * from users where email = ?");
+            prepare.setString(1, mail);
+            ResultSet rs = prepare.executeQuery();
+            if(rs.next()) {
+                if(BCrypt.checkpw(password, rs.getString("password")) && rs.getBoolean("is_admin")) {
+                    return new User(rs.getInt("id"),rs.getString("pseudo"), rs.getString("password"),rs.getString("email"), rs.getBoolean("is_admin"));
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     public boolean checkMailExist(String email) {
         try {
             Database.Connect();
