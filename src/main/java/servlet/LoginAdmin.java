@@ -59,10 +59,11 @@ public class LoginAdmin extends HttpServlet {
                  * on recupére le le prenom de l'utilisateur et le stocker dans l'attribut utilisateur
                  * */
                 session.setAttribute("currentUser", usDao.loginAdmin(entered_email, entered_pwd));
-                response.sendRedirect("/videogame_war_exploded/games");
+                response.sendRedirect("/videogame_war_exploded/admin");
             } else {
                 request.setAttribute("erreur", "L'email ou le mot de passe incorrect.");
 
+                response.sendRedirect("/videogame_war_exploded/games");
                 doGet(request, response);
             }
         }
