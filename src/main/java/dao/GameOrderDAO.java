@@ -13,8 +13,6 @@ public class GameOrderDAO {
 
     public void addGame(Game gameToAdd, Order order) {
         try {
-            System.out.println("gameToAdd: " + gameToAdd.getId());
-            System.out.println("order: " + order.getId());
 
             PreparedStatement sql = Database.connexion.prepareStatement("INSERT INTO game_orders (game_id, orders_id, quantity, is_ordered) VALUES (?, ?, 1, 0)");
 

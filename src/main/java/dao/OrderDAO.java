@@ -64,4 +64,18 @@ public class OrderDAO {
             e.printStackTrace();
         }
     }
+
+
+    public void confirmCart (Order order) {
+        try {
+            PreparedStatement sql = Database.connexion.prepareStatement("UPDATE game_orders SET is_ordered = 1 WHERE orders_id = ?");
+
+            sql.setInt(1, order.getId());
+
+            sql.executeUpdate();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

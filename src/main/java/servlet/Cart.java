@@ -1,6 +1,7 @@
 package servlet;
 
 import java.io.IOException;
+import java.util.Objects;
 
 import bean.Game;
 import bean.Order;
@@ -57,12 +58,12 @@ public class Cart extends HttpServlet {
 
         Order currentOrder = orderDao.getCurrentOrder((User) session.getAttribute("currentUser"));
 
-        System.out.println("id game : " + request.getAttribute("deleteItem"));
 
-        if (request.getAttribute("deleteItem") != null) {
-            Game gameToRemove = gameDao.findById((int) request.getAttribute("deleteItem"));
-            System.out.println("ici servlet");
+        if (request.getParameter("deleteItem") != null) {
+            Game gameToRemove = gameDao.findById(Integer.parseInt(request.getParameter("deleteItem")));
             gameOrderDao.removeGame(gameToRemove, currentOrder);
+        } else if (Objects.equals(request.getParameter("confirmCart"), "true")) {
+            orderDao.confirmCart(currentOrder);
         }
 
         request.getRequestDispatcher("vue/cart/show.jsp").forward(request, response);
