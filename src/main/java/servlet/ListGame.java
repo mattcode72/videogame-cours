@@ -3,9 +3,8 @@ package servlet;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import dao.CategoryDAO;
-import dao.LangDAO;
-import dao.PlatformDAO;
+import bean.User;
+import dao.*;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -15,7 +14,6 @@ import jakarta.servlet.http.HttpSession;
 
 import bean.Game;
 import bean.Order;
-import dao.GameDAO;
 //import dao.OrderDAO;
 
 /**
@@ -29,6 +27,8 @@ public class ListGame extends HttpServlet {
     CategoryDAO categoryDao = new CategoryDAO();
     PlatformDAO platformDao = new PlatformDAO();
     LangDAO langDao = new LangDAO();
+    OrderDAO orderDao = new OrderDAO();
+    GameOrderDAO gameOrderDao = new GameOrderDAO();
 
     /**
      * @see HttpServlet#HttpServlet()
@@ -53,31 +53,20 @@ public class ListGame extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession(true);
         String action = request.getParameter("action");
+        String idGameToAdd = request.getParameter("addToCart");
+
+        User userConnected = (User) session.getAttribute("user");
 
         if (action.equals("addToCart")) {
-            if(session.getAttribute("cart")==null) {
-                CartDAO cart_temp =new CartDAO();
-                session.setAttribute( "cart", cart_temp );
+            // On vérifie si une commande est déjà en cours
+            if (orderDao.getCurrentOrder(userConnected) == null) {
+                // Si ce n'est pas le cas, on crée une nouvelle commande
+                orderDao.createOrder(userConnected);
+            } else {
+                Order currentOrder = orderDao.getCurrentOrder(userConnected);
+
+                gameOrderDao.addGame(gameDao.findById(Integer.parseInt(idGameToAdd)), currentOrder);
             }
-
-            if (request.getParameter("addCart") != null ) {
-                //Recup panier depuis la session - ligne 56
-                CartDAO cartDetails= (CartDAO) session.getAttribute("cart");
-
-                try {
-                    GameDAO gameDao = new GameDAO();
-                    Game game = gameDAO.findById(Integer.parseInt(request.getParameter("addCart")));
-                    Cart cart = new Cart(game,1);
-                    cartDetails.addGame(cart);
-                    session.setAttribute("cart", cartDetails );
-
-                } catch (NumberFormatException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                }
-            }
-            //FIN PANIER
-            doGet(request, response);
         } else {
 
             String idCategory = request.getParameter("filterCategory");

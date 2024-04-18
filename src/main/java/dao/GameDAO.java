@@ -63,7 +63,6 @@ public class GameDAO {
 
 
     public ArrayList<Game> getGamesByFilter(String categoryId, String platformId, String langId, String search) {
-        Database.Connect();
 
         Stream<Game> gamesFiltered = getAll().stream();
 
