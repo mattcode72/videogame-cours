@@ -1,4 +1,4 @@
-<table class="table">
+<table class="table" style="margin-left: 30px; margin-right: 30px;">
     <thead>
     <tr>
         <th scope="col">Game</th>
@@ -20,8 +20,8 @@
                             <i class="fa-sharp fa-solid fa-minus"></i>
                         </button>
                     </form>
-                    <span ><c:out value="${item.quantity}"/></span>
-                    <form method="post">
+                    <span style="margin-left: 10px;"><c:out value="${item.quantity}"/></span>
+                    <form method="post" style="margin-left: 10px;">
                         <button class="btn btn-outline-success rounded-circle" name="more" value="${item.game.id}">
                             <i class="fa-sharp fa-solid fa-plus"></i>
                         </button>
@@ -41,21 +41,31 @@
 
 </table>
 
-<form method="post">
-    <button class="btn btn-outline-danger" name="deleteCart" value="${item.game.id}">
-        <i class="fa-sharp fa-solid fa-times"></i> Delete cart
-    </button>
-</form>
+<div class="row" style="margin-left: 30px">
+    <div class="col-2">
+        <a href="#confirmCommand">
+            <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#confirmCommand">Buy</button>
+        </a>
+    </div>
+</div>
 
-<div class="col-md-4 command">
-<%--    <button class="btn btn-outline-success">--%>
-<%--        <i class="fa-regular fa-credit-card"></i>--%>
-<%--        Total price: <c:out value="${cart.total()}"/> dollars--%>
-<%--    </button>--%>
-    <h4>Passage � la caisse </h4>
-    <a href="command">
-        <button class="btn btn-warning">
-            Commandez vos jeux
-        </button>
-    </a>
+<!-- Modal -->
+<div class="modal fade" id="confirmCommand" tabindex="-1" aria-labelledby="confirmCommandLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="confirmCommandLabel">Confirm Purchase</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Are you sure you want to proceed with this order?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                <form action="" >
+                    <button type="button" class="btn btn-primary" name="confirmCart">Yes</button>
+                </form>
+            </div>
+        </div>
+    </div>
 </div>
