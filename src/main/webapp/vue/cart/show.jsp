@@ -30,7 +30,7 @@
             </td>
             <td>
                 <form method="post" action="">
-                    <button class="btn btn-outline-danger rounded-circle" name="deleteItem" value="${item.game.id}">
+                    <button type="submit" class="btn btn-outline-danger rounded-circle" name="deleteItem" value="${item.game.id}">
                         <i class="fa-sharp fa-solid fa-times"></i>
                     </button>
                 </form>
@@ -62,8 +62,8 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
-                <form action="" >
-                    <button type="button" class="btn btn-primary" name="confirmCart">Yes</button>
+                <form method="post" action="" >
+                    <button type="submit" class="btn btn-primary" name="confirmCart">Yes</button>
                 </form>
             </div>
         </div>
