@@ -4,11 +4,10 @@
 
     <form method="post" action="">
         <div class="row">
-            <div class="col-2">
+            <div class="col-2 me-3">
                 <div class="row">
                 <div class="col-12" style="margin-top: 10px;">
-                <select name="filterCategory">
-                    <option value="0">Catégories</option>
+                <select name="filterCategory"  class="selectpicker" multiple>
                     <c:forEach items="${categories}" var="category">
                         <option value="<c:out value="${category.id}"></c:out>">
                             <c:out value="${category.name}"></c:out>
@@ -18,25 +17,25 @@
                 </div>
                 </div>
             </div>
-            <div class="col-2">
+            <div class="col-2 me-3">
                 <div class="row">
                     <div class="col-12" style="margin-top: 10px;">
-                        <select name="filterPlatform">
-                            <option value="0">Plateformes</option>
-                            <c:forEach items="${platforms}" var="platform">
-                                <option value="<c:out value="${platform.id}"></c:out>">
-                                    <c:out value="${platform.name}"></c:out>
-                                </option>
-                            </c:forEach>
-                        </select>
+                        <label>
+                            <select name="filterPlatform" class="selectpicker" multiple>
+                                <c:forEach items="${platforms}" var="platform">
+                                    <option value="<c:out value="${platform.id}"></c:out>">
+                                        <c:out value="${platform.name}"></c:out>
+                                    </option>
+                                </c:forEach>
+                            </select>
+                        </label>
                     </div>
                 </div>
             </div>
-            <div class="col-2">
+            <div class="col-2 me-3">
                 <div class="row">
                     <div class="col-12" style="margin-top: 10px;">
-                        <select name="filterLang">
-                            <option value="0">Langues</option>
+                        <select name="filterLang" class="selectpicker" multiple>
                             <c:forEach items="${langs}" var="lang">
                                 <option value="<c:out value="${lang.id}"></c:out>">
                                     <c:out value="${lang.name}"></c:out>
@@ -49,7 +48,7 @@
             <div class="col-2">
                 <div class="row">
                     <div class="col-12" style="margin-top: 10px;">
-                        <input type="text" name="filterName" placeholder="Nom">
+                        <input type="text" name="filterName" placeholder="Nom" class="form-control">
                     </div>
                 </div>
             </div>

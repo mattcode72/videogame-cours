@@ -19,6 +19,17 @@
                              </span>
                 </c:forEach>
             </div>
+            <div class="row" style="margin-top: 10px;">
+                <div class="col-6" style="text-align: left">
+                    <h2>Game's description</h2>
+                    <c:out value="${game.description}"></c:out>
+                </div>
+                <div class="col-6" style="text-align: left">
+                    <h2>Complementary informations</h2>
+                </div>
+            </div>
+
+
             <div class="col-12">
                 <table style="border : 1px solid black;">
                     <tr>
