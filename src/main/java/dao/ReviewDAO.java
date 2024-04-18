@@ -22,7 +22,7 @@ public class ReviewDAO {
             ResultSet rs = sql.executeQuery();
 
             while (rs.next()) {
-                User user = userDAO.findById(rs.getInt("user_id"));
+                User user = userDAO.findById(rs.getInt("users_id"));
 
                 Review review = new Review(rs.getInt("id"), rs.getInt("rating"), rs.getString("content"), rs.getDate("date"), user);
 

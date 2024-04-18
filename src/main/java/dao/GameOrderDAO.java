@@ -13,12 +13,15 @@ public class GameOrderDAO {
 
     public void addGame(Game gameToAdd, Order order) {
         try {
+            System.out.println("gameToAdd: " + gameToAdd.getId());
+            System.out.println("order: " + order.getId());
+
             PreparedStatement sql = Database.connexion.prepareStatement("INSERT INTO game_orders (game_id, orders_id, quantity, is_ordered) VALUES (?, ?, 1, 0)");
 
             sql.setInt(1, gameToAdd.getId());
             sql.setInt(2, order.getId());
 
-            sql.executeQuery();
+            sql.executeUpdate();
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -32,7 +35,7 @@ public class GameOrderDAO {
             sql.setInt(1, gameToRemove.getId());
             sql.setInt(2, user.getId());
 
-            sql.executeQuery();
+            sql.executeUpdate();
 
         } catch (Exception e) {
             e.printStackTrace();

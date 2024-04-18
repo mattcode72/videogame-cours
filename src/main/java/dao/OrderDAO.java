@@ -19,7 +19,7 @@ public class OrderDAO {
             ResultSet rs = sql.executeQuery();
 
             if (rs.next()) {
-                User user = userDAO.findById(rs.getInt("user_id"));
+                User user = userDAO.findById(rs.getInt("users_id"));
 
                 return new Order(rs.getInt("id"), rs.getDate("date"), user);
             }
@@ -36,7 +36,7 @@ public class OrderDAO {
 
         try {
             // On récupère la dernière commande de l'utilisateur connecté
-            PreparedStatement sql = Database.connexion.prepareStatement("SELECT top 1 * FROM orders where orders.user_id = ? order by id desc");
+            PreparedStatement sql = Database.connexion.prepareStatement("SELECT * FROM orders where orders.users_id = ? order by id desc limit 1");
 
             sql.setInt(1, user.getId());
 
@@ -54,11 +54,11 @@ public class OrderDAO {
 
     public void createOrder(User user) {
         try {
-            PreparedStatement sql = Database.connexion.prepareStatement("INSERT INTO orders (date, user_id) VALUES (now(), ?)");
+            PreparedStatement sql = Database.connexion.prepareStatement("INSERT INTO orders (date, users_id) VALUES (now(), ?)");
 
             sql.setInt(1, user.getId());
 
-            sql.execute();
+            sql.executeUpdate();
 
         } catch (Exception e) {
             e.printStackTrace();

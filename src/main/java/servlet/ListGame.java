@@ -53,22 +53,25 @@ public class ListGame extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession(true);
         String action = request.getParameter("action");
-        String idGameToAdd = request.getParameter("addToCart");
 
-        User userConnected = (User) session.getAttribute("user");
 
         if (action.equals("addToCart")) {
+            String idGameToAdd = request.getParameter("addCart");
+            System.out.println("idGameToAdd : " + idGameToAdd);
+            User userConnected = (User) session.getAttribute("currentUser");
+
             // On vérifie si une commande est déjà en cours
             if (orderDao.getCurrentOrder(userConnected) == null) {
                 // Si ce n'est pas le cas, on crée une nouvelle commande
                 orderDao.createOrder(userConnected);
-            } else {
-                Order currentOrder = orderDao.getCurrentOrder(userConnected);
-
-                gameOrderDao.addGame(gameDao.findById(Integer.parseInt(idGameToAdd)), currentOrder);
             }
-        } else {
+            Order currentOrder = orderDao.getCurrentOrder(userConnected);
+            Game game = gameDao.findById(Integer.parseInt(idGameToAdd));
 
+            gameOrderDao.addGame(game, currentOrder);
+
+            request.setAttribute("games", gameDao.getAll());
+        } else {
             String idCategory = request.getParameter("filterCategory");
             String idPlatform = request.getParameter("filterPlatform");
             String idLang = request.getParameter("filterLang");
@@ -80,6 +83,9 @@ public class ListGame extends HttpServlet {
             request.setAttribute("platforms", platformDao.getAll());
             request.setAttribute("langs", langDao.getAll());
         }
+
+
+
 
         request.getRequestDispatcher("vue/game/list.jsp").forward(request, response);
     }
