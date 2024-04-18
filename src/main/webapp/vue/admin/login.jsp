@@ -8,6 +8,7 @@
 </c:if>
 <title class="text-center">Login</title>
 <div class="container">
+    <h1 class="text-center">Admin login</h1>
     <form method="post">
         <div class="mb-3">
             <label class="form-label">Email address</label>

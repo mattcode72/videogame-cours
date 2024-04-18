@@ -3,6 +3,7 @@
 <div class="container">
 
     <form method="post" action="">
+        <input type="hidden" name="action" value="addToFilter">
         <div class="row">
             <div class="col-2 me-3">
                 <div class="row">
@@ -86,7 +87,8 @@
                             <c:out value="${game.price}"></c:out> euros
                         </div>
                         <div class="col-3">
-                            <form method="post">
+                            <form method="post" action="">
+                                <input type="hidden" name="action" value="addToCart">
                                 <button type="submit" class="btn btn-sm btn-outline-success rounded-pill"
                                     name="addPanier" value="${game.id}">
                                     <i class="fa fa-cart-plus"></i>
