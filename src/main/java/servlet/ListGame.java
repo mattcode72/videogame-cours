@@ -51,9 +51,9 @@ public class ListGame extends HttpServlet {
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        int idCategory = Integer.parseInt(request.getParameter("filterCategory"));
-        int idPlatform = Integer.parseInt(request.getParameter("filterPlatform"));
-        int idLang = Integer.parseInt(request.getParameter("filterLang"));
+        String idCategory = request.getParameter("filterCategory");
+        String idPlatform = request.getParameter("filterPlatform");
+        String idLang = request.getParameter("filterLang");
         String search = request.getParameter("filterName");
 
 

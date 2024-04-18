@@ -62,19 +62,19 @@ public class GameDAO {
     }
 
 
-    public ArrayList<Game> getGamesByFilter(int categoryId, int platformId, int langId, String search) {
+    public ArrayList<Game> getGamesByFilter(String categoryId, String platformId, String langId, String search) {
         Database.Connect();
 
         Stream<Game> gamesFiltered = getAll().stream();
 
-        if (categoryId != 0) {
-            gamesFiltered = gamesFiltered.filter(game -> game.getCategories().stream().anyMatch(category -> category.getId() == categoryId));
+        if (categoryId != null) {
+            gamesFiltered = gamesFiltered.filter(game -> game.getCategories().stream().anyMatch(category -> category.getId() == Integer.parseInt(categoryId)));
         }
-        if (platformId != 0) {
-            gamesFiltered = gamesFiltered.filter(game -> game.getPlatforms().stream().anyMatch(platform -> platform.getId() == platformId));
+        if (platformId != null) {
+            gamesFiltered = gamesFiltered.filter(game -> game.getPlatforms().stream().anyMatch(platform -> platform.getId() == Integer.parseInt(platformId)));
         }
-        if (langId != 0) {
-            gamesFiltered = gamesFiltered.filter(game -> game.getLangs().stream().anyMatch(lang -> lang.getId() == langId));
+        if (langId != null) {
+            gamesFiltered = gamesFiltered.filter(game -> game.getLangs().stream().anyMatch(lang -> lang.getId() == Integer.parseInt(langId)));
         }
         if (!search.isEmpty()) {
             gamesFiltered = gamesFiltered.filter(game -> game.getName().toLowerCase().contains(search.toLowerCase()));
