@@ -36,7 +36,10 @@ public class OrderDAO {
 
         try {
             // On récupère la dernière commande de l'utilisateur connecté
-            PreparedStatement sql = Database.connexion.prepareStatement("SELECT * FROM orders where orders.users_id = ? order by id desc limit 1");
+            PreparedStatement sql = Database.connexion.prepareStatement("SELECT * FROM orders " +
+                                                                            " INNER JOIN game_orders ON orders.id = game_orders.orders_id and is_ordered = 0" +
+                                                                            " where orders.users_id = ? " +
+                                                                            " order by id desc limit 1");
 
             sql.setInt(1, user.getId());
 

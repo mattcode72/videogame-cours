@@ -63,7 +63,7 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
                 <form method="post" action="" >
-                    <button type="submit" class="btn btn-primary" name="confirmCart">Yes</button>
+                    <button type="submit" class="btn btn-primary" name="confirmCart" value="true">Yes</button>
                 </form>
             </div>
         </div>
