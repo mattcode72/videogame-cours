@@ -12,16 +12,15 @@
 
     <section class="container-account">
 
-        <h1><i class="bi bi-person-vcard"></i> Mon compte</h1>
+        <h1><i class="bi bi-person-vcard"></i> My account</h1>
 
-        <div>Num�ro client : <c:out value="${currentUser.id}" /></div>
         <div id="accountNav" class="sticky-top">
-            <a class="btn btn-primary" href="#accountInfo" role="button"><i class="bi bi-person-badge"></i> Infos</a>
-            <a class="btn btn-primary" href="#accountPassword" role="button"><i class="bi bi-three-dots"></i> Mot de passe</a>
+            <a class="btn btn-primary" href="#accountInfo" role="button"><i class="bi bi-person-badge"></i> Informations</a>
+            <a class="btn btn-primary" href="#accountPassword" role="button"><i class="bi bi-three-dots"></i> Password</a>
         </div>
 
         <hr id="accountInfo">
-        <h3 class="text-secondary"><i class="bi bi-person-badge"></i> Mes informations personnelles</h3>
+        <h3 class="text-secondary"><i class="bi bi-person-badge"></i> Personnal informations</h3>
         <div class="row g-0 text-center">
 
             <div class="col-md-8">
@@ -49,35 +48,34 @@
             </div>
         </div>
 
-        <!-- CHANGEMENT DE MOT DE PASSE -->
         <hr id="accountPassword">
-        <h3 class="text-secondary"><i class="bi bi-three-dots"></i> Mon mot de passe</h3>
+        <h3 class="text-secondary"><i class="bi bi-three-dots"></i>Password</h3>
         <form method="post">
             <input type="hidden" class="form-control" name="formSubmited" value="accountPassword">
             <div class="mb-3">
                 <div class="row">
                     <div class="col">
-                        <label class="form-label">Ancien</label>
+                        <label class="form-label">Old</label>
                         <input type="password" class="form-control" id="oldPassword" name="oldPassword" required>
                     </div>
                     <div class="col">
-                        <label class="form-label">Nouveau</label>
+                        <label class="form-label">New</label>
                         <input type="password" class="form-control" id="newPassword" name="newPassword" required>
                     </div>
                     <div class="col">
-                        <label class="form-label">Confirmation</label>
+                        <label class="form-label">New again</label>
                         <input type="password" class="form-control" id="confPassword" name="confPassword" required>
                     </div>
                 </div>
             </div>
-            <button type="submit" class="btn btn-outline-warning">Changer mon mot de passe</button>
+            <button type="submit" class="btn btn-outline-warning">Change password</button>
         </form>
 
 
         <hr>
         <div class="text-end">
-            <h5 class="text-secondary"><i class="bi bi-person-fill-dash text-danger"></i> Désactiver mon compte</h5>
-            <button type="submit" class="btn btn-sm btn-outline-danger" data-bs-toggle="modal" data-bs-target="#deactivateModal">Je désactive mon compte</button>
+            <h5 class="text-secondary"><i class="bi bi-person-fill-dash text-danger"></i> Disable my account</h5>
+            <button type="submit" class="btn btn-sm btn-outline-danger" data-bs-toggle="modal" data-bs-target="#deactivateModal">Disable my account</button>
         </div>
     </section>
 
@@ -111,7 +109,7 @@
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
 
-                        <button type="submit" class="btn btn-primary">Je modifie mon compte</button>
+                        <button type="submit" class="btn btn-primary">Modify my account</button>
                     </div>
                 </form>
             </div>
