@@ -12,7 +12,7 @@
     <c:forEach items="${items}" var="item">
         <tr>
             <td><c:out value="${item.game.name}"/></td>
-            <td><c:out value="${item.game.price}"/></td>
+            <td><c:out value="${item.game.price * item.quantity}"/></td>
             <td>
                 <div style="display: inline-flex;">
                     <form method="post">
@@ -63,7 +63,7 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
                 <form method="post" action="" >
-                    <button type="submit" class="btn btn-primary" name="confirmCart">Yes</button>
+                    <button type="submit" class="btn btn-primary" name="confirmCart" value="true">Yes</button>
                 </form>
             </div>
         </div>

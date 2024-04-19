@@ -31,7 +31,6 @@ public class Show extends HttpServlet {
      * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
      */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        System.out.println(request.getParameter("id"));
 
         //Convertir le request.getParameter() en int
         int id = Integer.parseInt(request.getParameter("id"));

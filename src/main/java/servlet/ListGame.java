@@ -58,9 +58,6 @@ public class ListGame extends HttpServlet {
         if (action.equals("addToCart")) {
             String idGameToAdd = request.getParameter("addCart");
             int idGame = Integer.parseInt(idGameToAdd);
-            System.out.println("idGameToAdd : " + idGameToAdd);
-
-            System.out.println("idGameToAdd : " + Integer.parseInt(idGameToAdd));
 
             User userConnected = (User) session.getAttribute("currentUser");
 

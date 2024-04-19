@@ -32,18 +32,18 @@ public class OrderDAO {
 
 
     public Order getCurrentOrder(User user) {
-        UserDAO userDAO = new UserDAO();
-
         try {
-            // On récupère la dernière commande de l'utilisateur connecté
-            PreparedStatement sql = Database.connexion.prepareStatement("SELECT * FROM orders where orders.users_id = ? order by id desc limit 1");
+            // On récupère la dernière commande en cours de l'utilisateur connecté
+            PreparedStatement sql = Database.connexion.prepareStatement("SELECT * FROM orders " +
+                                                                            " where orders.users_id = ? and orders.is_finished = 0" +
+                                                                            " order by id desc limit 1");
 
             sql.setInt(1, user.getId());
 
             ResultSet rs = sql.executeQuery();
 
             if (rs.next()) {
-                return new Order(rs.getInt("id"), rs.getDate("date"), user);
+                    return new Order(rs.getInt("id"), rs.getDate("date"), user);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -54,11 +54,31 @@ public class OrderDAO {
 
     public void createOrder(User user) {
         try {
-            PreparedStatement sql = Database.connexion.prepareStatement("INSERT INTO orders (date, users_id) VALUES (now(), ?)");
+            PreparedStatement sql = Database.connexion.prepareStatement("INSERT INTO orders (date, users_id, is_finished) VALUES (now(), ?, 0)");
 
             sql.setInt(1, user.getId());
 
             sql.executeUpdate();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    public void confirmCart (Order order) {
+        try {
+            PreparedStatement sql = Database.connexion.prepareStatement("UPDATE game_orders SET is_ordered = 1 WHERE orders_id = ?");
+
+            sql.setInt(1, order.getId());
+
+            sql.executeUpdate();
+
+            PreparedStatement sql2 = Database.connexion.prepareStatement("UPDATE orders SET is_finished = 1 WHERE id = ?");
+
+            sql2.setInt(1, order.getId());
+
+            sql2.executeUpdate();
 
         } catch (Exception e) {
             e.printStackTrace();

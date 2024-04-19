@@ -60,7 +60,7 @@ public class Login extends HttpServlet {
                  * on recupére le le prenom de l'utilisateur et le stocker dans l'attribut utilisateur
                  * */
                 session.setAttribute("currentUser", usDao.login(entered_email, entered_pwd));
-                response.sendRedirect("/videogame_war_exploded/inscription");
+                response.sendRedirect("/videogame_war_exploded/games");
             } else {
                 request.setAttribute("erreur", "L'email ou le mot de passe incorrect.");
 
