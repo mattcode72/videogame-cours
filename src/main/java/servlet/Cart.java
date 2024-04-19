@@ -47,7 +47,7 @@ public class Cart extends HttpServlet {
 
         request.setAttribute("items", gameOrderDao.getGamesInCart(currentOrder));
 
-         request.getRequestDispatcher("vue/cart/show.jsp").forward(request, response);
+        request.getRequestDispatcher("vue/cart/show.jsp").forward(request, response);
     }
 
     /**
@@ -64,8 +64,14 @@ public class Cart extends HttpServlet {
             gameOrderDao.removeGame(gameToRemove, currentOrder);
         } else if (Objects.equals(request.getParameter("confirmCart"), "true")) {
             orderDao.confirmCart(currentOrder);
+        } else if (request.getParameter("more") != null) {
+            Game gameToAddQuantity = gameDao.findById(Integer.parseInt(request.getParameter("more")));
+            gameOrderDao.addGameQuantity(gameToAddQuantity, currentOrder);
+        } else if (request.getParameter("less") != null) {
+            Game gameToRemoveQuantity = gameDao.findById(Integer.parseInt(request.getParameter("less")));
+            gameOrderDao.removeGameQuantity(gameToRemoveQuantity, currentOrder);
         }
 
-        request.getRequestDispatcher("vue/cart/show.jsp").forward(request, response);
+        doGet(request, response);
     }
 }

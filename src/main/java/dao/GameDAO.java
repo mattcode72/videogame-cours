@@ -84,7 +84,6 @@ public class GameDAO {
 
 
     public Game findById(int id) {
-        System.out.println(id);
         CategoryDAO categoryDAO = new CategoryDAO();
         try  {
 

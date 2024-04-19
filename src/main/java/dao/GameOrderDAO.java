@@ -13,6 +13,10 @@ public class GameOrderDAO {
 
     public void addGame(Game gameToAdd, Order order) {
         try {
+            if (checkGameInCart(gameToAdd, order)) {
+                addGameQuantity(gameToAdd, order);
+                return;
+            }
 
             PreparedStatement sql = Database.connexion.prepareStatement("INSERT INTO game_orders (game_id, orders_id, quantity, is_ordered) VALUES (?, ?, 1, 0)");
 
@@ -24,6 +28,26 @@ public class GameOrderDAO {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+
+    public Boolean checkGameInCart (Game game, Order order) {
+        try {
+            PreparedStatement sql = Database.connexion.prepareStatement("SELECT * FROM game_orders WHERE game_id = ? and orders_id = ?");
+
+            sql.setInt(1, game.getId());
+            sql.setInt(2, order.getId());
+
+            ResultSet rs = sql.executeQuery();
+
+            if (rs.next()) {
+                return true;
+            }
+
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 
     public void removeGame(Game gameToRemove, Order order) {
@@ -65,6 +89,35 @@ public class GameOrderDAO {
             e.printStackTrace();
         }
         return null;
+    }
+
+
+    public void addGameQuantity (Game game, Order order) {
+        try {
+            PreparedStatement sql = Database.connexion.prepareStatement("UPDATE game_orders SET quantity = quantity + 1 WHERE game_id = ? and orders_id = ?");
+
+            sql.setInt(1, game.getId());
+            sql.setInt(2, order.getId());
+
+            sql.executeUpdate();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void removeGameQuantity (Game game, Order order) {
+        try {
+            PreparedStatement sql = Database.connexion.prepareStatement("UPDATE game_orders SET quantity = quantity - 1 WHERE game_id = ? and orders_id = ?");
+
+            sql.setInt(1, game.getId());
+            sql.setInt(2, order.getId());
+
+            sql.executeUpdate();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 }
