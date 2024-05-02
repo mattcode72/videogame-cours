@@ -43,6 +43,12 @@ public class Cart extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession(true);
 
+        // On redirige l'user vers la page de connexion s'il n'est pas connecté
+        if (session.getAttribute("currentUser") == null) {
+            response.sendRedirect("login");
+            return;
+        }
+
         Order currentOrder = orderDao.getCurrentOrder((User) session.getAttribute("currentUser"));
 
         request.setAttribute("items", gameOrderDao.getGamesInCart(currentOrder));

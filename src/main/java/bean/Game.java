@@ -62,6 +62,14 @@ public class Game {
         this.reviews = reviews;
     }
 
+    public Game (int id, String name, String description, Date releaseDate, int price) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.releaseDate = releaseDate;
+        this.price = price;
+    }
+
     public int getId() {
         return id;
     }

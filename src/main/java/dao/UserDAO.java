@@ -6,6 +6,7 @@ import org.springframework.security.crypto.bcrypt.BCrypt;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class UserDAO {
 
@@ -187,4 +188,36 @@ public class UserDAO {
         }
         return false;
     }
+
+    public ArrayList<User> getAll () {
+        ArrayList<User> users = new ArrayList<>();
+        try {
+            Database.Connect();
+            PreparedStatement sql = Database.connexion.prepareStatement("SELECT * FROM users");
+            ResultSet rs = sql.executeQuery();
+            while (rs.next()) {
+                users.add(new User(rs.getInt("id"), rs.getString("pseudo"), rs.getString("password"), rs.getString("email"), rs.getBoolean("is_admin")));
+            }
+            return users;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+
+    public void updateUser (User user) {
+        try {
+            Database.Connect();
+            PreparedStatement sql = Database.connexion.prepareStatement("UPDATE users SET pseudo = ?, email = ?, is_admin = ? WHERE id = ?");
+            sql.setString(1, user.getPseudo());
+            sql.setString(2, user.getEmail());
+            sql.setBoolean(3, user.getIsAdmin());
+            sql.setInt(4, user.getId());
+            sql.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
 }

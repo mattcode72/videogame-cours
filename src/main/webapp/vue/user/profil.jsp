@@ -14,11 +14,6 @@
 
         <h1><i class="bi bi-person-vcard"></i> My account</h1>
 
-        <div id="accountNav" class="sticky-top">
-            <a class="btn btn-primary" href="#accountInfo" role="button"><i class="bi bi-person-badge"></i> Informations</a>
-            <a class="btn btn-primary" href="#accountPassword" role="button"><i class="bi bi-three-dots"></i> Password</a>
-        </div>
-
         <hr id="accountInfo">
         <h3 class="text-secondary"><i class="bi bi-person-badge"></i> Personnal informations</h3>
         <div class="row g-0 text-center">
@@ -73,6 +68,16 @@
 
 
         <hr>
+
+
+        <ul>
+            <c:forEach items="${orders}" var="order">
+                <li>
+                    <c:out value="${order.id}"></c:out>, <c:out value="${order.date}"></c:out>
+                </li>
+            </c:forEach>
+        </ul>
+
         <div class="text-end">
             <h5 class="text-secondary"><i class="bi bi-person-fill-dash text-danger"></i> Disable my account</h5>
             <button type="submit" class="btn btn-sm btn-outline-danger" data-bs-toggle="modal" data-bs-target="#deactivateModal">Disable my account</button>

@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+<%@ page contentType="text/html; charset=ISO-8859-1"
          pageEncoding="ISO-8859-1" %>
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
@@ -7,7 +7,7 @@
 <html>
 <head>
     <meta charset="ISO-8859-1">
-    <title>Insert title here</title>
+    <title>Videogames site</title>
 
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"
             integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
@@ -38,15 +38,6 @@
             <img alt="" src="${pageContext.request.contextPath}/assets/img/logo/videogame.jpg" width="75">
         </a>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link" href="/videogame_war_exploded/about">A propos de nous</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/videogame_war_exploded/contact">Nous contacter</a>
-                </li>
-
-            </ul>
             <div class="d-flex" style="margin-right: 5vw;">
                 <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll">
                     <c:if test="${not empty currentUser}">

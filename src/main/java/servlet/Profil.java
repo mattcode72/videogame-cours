@@ -2,6 +2,7 @@ package servlet;
 
 import java.io.IOException;
 
+import dao.OrderDAO;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -33,6 +34,10 @@ public class Profil extends HttpServlet {
      * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
      */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        OrderDAO orderDao = new OrderDAO();
+
+        request.setAttribute("orders", orderDao.getAllOrdersFinishedByUser((User) request.getSession().getAttribute("currentUser")));
+
         request.getRequestDispatcher("vue/user/profil.jsp").forward(request, response);
     }
 

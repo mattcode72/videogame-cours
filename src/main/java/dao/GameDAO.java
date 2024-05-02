@@ -141,4 +141,24 @@ public class GameDAO {
         }
         return null;
     }
+
+    public void updateGame (Game game) {
+        try {
+            Database.Connect();
+            PreparedStatement sql = Database.connexion.prepareStatement(" UPDATE game SET"
+                    + " name = ?, description = ?, release_date = ?, price = ?"
+                    + " WHERE id= ?");
+
+            sql.setString(1, game.getName());
+            sql.setString(2, game.getDescription());
+            sql.setDate(3, new java.sql.Date(game.getReleaseDate().getTime()));
+            sql.setInt(4, game.getPrice());
+            sql.setInt(5, game.getId());
+
+            sql.executeUpdate();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

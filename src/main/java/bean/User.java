@@ -26,6 +26,13 @@ public class User {
         this.isAdmin = isAdmin;
     }
 
+    public User(int id, String pseudo, String email, boolean isAdmin) {
+        this.id = id;
+        this.pseudo = pseudo;
+        this.email = email;
+        this.isAdmin = isAdmin;
+    }
+
     public int getId() {
         return id;
     }
@@ -58,7 +65,7 @@ public class User {
         this.email = email;
     }
 
-    public boolean isAdmin() {
+    public boolean getIsAdmin() {
         return isAdmin;
     }
 

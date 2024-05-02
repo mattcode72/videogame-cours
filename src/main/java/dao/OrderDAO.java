@@ -5,6 +5,7 @@ import bean.User;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 
 public class OrderDAO {
 
@@ -83,5 +84,25 @@ public class OrderDAO {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+
+    public ArrayList<Order> getAllOrdersFinishedByUser(User user) {
+        ArrayList<Order> orders = new ArrayList<>();
+        try {
+            PreparedStatement sql = Database.connexion.prepareStatement("SELECT * FROM orders WHERE users_id = ? and is_finished = 1");
+
+            sql.setInt(1, user.getId());
+
+            ResultSet rs = sql.executeQuery();
+
+            while (rs.next()) {
+                orders.add(new Order(rs.getInt("id"), rs.getDate("date"), user));
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return orders;
     }
 }
