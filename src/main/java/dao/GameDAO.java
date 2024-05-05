@@ -161,4 +161,63 @@ public class GameDAO {
             e.printStackTrace();
         }
     }
+
+
+    public void addGame (Game game) {
+        try {
+            Database.Connect();
+            PreparedStatement sql = Database.connexion.prepareStatement(" INSERT INTO game (name, description, release_date, price)"
+                    + " VALUES (?, ?, ?, ?)");
+
+            sql.setString(1, game.getName());
+            sql.setString(2, game.getDescription());
+            sql.setDate(3, new java.sql.Date(game.getReleaseDate().getTime()));
+            sql.setInt(4, game.getPrice());
+
+            sql.executeUpdate();
+
+            PreparedStatement sql2 = Database.connexion.prepareStatement("INSERT INTO game_platform (game_id, platform_id) VALUES (?, ?)");
+
+            for (Platform platform : game.getPlatforms()) {
+                sql2.setInt(1, game.getId());
+                sql2.setInt(2, platform.getId());
+                sql2.executeUpdate();
+            }
+
+            PreparedStatement sql3 = Database.connexion.prepareStatement("INSERT INTO game_lang (game_id, lang_id) VALUES (?, ?)");
+
+            for (Lang lang : game.getLangs()) {
+                sql3.setInt(1, game.getId());
+                sql3.setInt(2, lang.getId());
+                sql3.executeUpdate();
+            }
+
+            PreparedStatement sql4 = Database.connexion.prepareStatement("INSERT INTO game_category (game_id, category_id) VALUES (?, ?)");
+
+            for (Category category : game.getCategories()) {
+                sql4.setInt(1, game.getId());
+                sql4.setInt(2, category.getId());
+                sql4.executeUpdate();
+            }
+
+            PreparedStatement sql5 = Database.connexion.prepareStatement("INSERT INTO game_developer (game_id, developer_id) VALUES (?, ?)");
+
+            for (Developer developer : game.getDevelopers()) {
+                sql5.setInt(1, game.getId());
+                sql5.setInt(2, developer.getId());
+                sql5.executeUpdate();
+            }
+
+            PreparedStatement sql6 = Database.connexion.prepareStatement("INSERT INTO game_gamemode (game_id, gamemode_id) VALUES (?, ?)");
+
+            for (GameMode gameMode : game.getGameModes()) {
+                sql6.setInt(1, game.getId());
+                sql6.setInt(2, gameMode.getId());
+                sql6.executeUpdate();
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

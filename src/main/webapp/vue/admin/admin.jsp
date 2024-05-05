@@ -66,5 +66,8 @@
     </tbody>
 </table>
 
+<br>
+<a href="admin/addGame">Add a game</a>
+
 </body>
 </html>
