@@ -54,4 +54,19 @@ public class MediaDAO {
 
         return null;
     }
+
+    public void addMedia(Media media) {
+        try {
+            PreparedStatement sql = Database.connexion.prepareStatement("INSERT INTO media (path, is_thumbnail, game_id, media_type_id) VALUES (?, ?, ?, ?)");
+
+            sql.setString(1, media.getPath());
+            sql.setBoolean(2, media.getThumbnail());
+            sql.setInt(3, media.getGame().getId());
+            sql.setInt(4, media.getMediaType().getId());
+
+            sql.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

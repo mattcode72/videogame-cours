@@ -28,6 +28,7 @@ public class PlatformDAO {
     }
 
     public ArrayList<Platform> getAll() {
+        Database.Connect();
         ArrayList<Platform> platforms = new ArrayList<>();
         try {
             PreparedStatement sql = Database.connexion.prepareStatement("select * from platform");

@@ -26,6 +26,7 @@ public class CategoryDAO {
     }
 
     public ArrayList<Category> getAll() {
+        Database.Connect();
         ArrayList<Category> categories = new ArrayList<>();
         try {
             PreparedStatement sql = Database.connexion.prepareStatement("select * from category");

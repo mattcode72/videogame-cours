@@ -1,7 +1,5 @@
 package bean;
 
-import com.oracle.wls.shaded.org.apache.xpath.operations.Bool;
-
 public class Media {
     private int id;
     private String path;
