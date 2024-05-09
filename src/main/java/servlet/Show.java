@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import bean.Developer;
 import bean.GameDeveloper;
+import dao.MediaDAO;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -31,12 +32,15 @@ public class Show extends HttpServlet {
      * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
      */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        MediaDAO mediaDAO = new MediaDAO();
+        GameDAO gameDao = new GameDAO();
 
-        //Convertir le request.getParameter() en int
         int id = Integer.parseInt(request.getParameter("id"));
 
-        GameDAO gameDao = new GameDAO();
         request.setAttribute("game", gameDao.findById(id));
+
+        request.setAttribute("images", mediaDAO.getMediasPageByGameId(id, 1));
+
         request.getRequestDispatcher("vue/game/show.jsp").forward(request, response);
     }
 }

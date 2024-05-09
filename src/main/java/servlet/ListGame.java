@@ -29,6 +29,7 @@ public class ListGame extends HttpServlet {
     LangDAO langDao = new LangDAO();
     OrderDAO orderDao = new OrderDAO();
     GameOrderDAO gameOrderDao = new GameOrderDAO();
+    MediaDAO mediaDao = new MediaDAO();
 
     /**
      * @see HttpServlet#HttpServlet()
@@ -46,6 +47,7 @@ public class ListGame extends HttpServlet {
         request.setAttribute("categories", categoryDao.getAll());
         request.setAttribute("platforms", platformDao.getAll());
         request.setAttribute("langs", langDao.getAll());
+
 
         request.getRequestDispatcher("vue/game/list.jsp").forward(request, response);
     }

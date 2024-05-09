@@ -17,6 +17,7 @@ public class Game {
     private ArrayList<GameMode> gameModes;
     private ArrayList<Developer> developers;
     private ArrayList<Review> reviews;
+    private Media thumbnail;
 
 
     public Game() {
@@ -28,6 +29,7 @@ public class Game {
         this.releaseDate = releaseDate;
         this.price = price;
         this.categories = categories;
+        this.thumbnail = thumbnail;
     }
 
     public Game(int id, String name, String description, Date releaseDate, int price, ArrayList<Category> categories, ArrayList<Platform> platforms, ArrayList<Lang> langs, Media thumbnail) {
@@ -39,9 +41,10 @@ public class Game {
         this.categories = categories;
         this.platforms = platforms;
         this.langs = langs;
+        this.thumbnail = thumbnail;
     }
 
-    public Game(int id,String name, String description, Date releaseDate, int price, ArrayList<Category> categories, ArrayList<Media> images, ArrayList<Media> videos, ArrayList<Platform> platforms, ArrayList<Lang> langs, ArrayList<GameMode> gameModes, ArrayList<Developer> developers, ArrayList<Review> reviews) {
+    public Game(int id,String name, String description, Date releaseDate, int price, ArrayList<Category> categories, ArrayList<Platform> platforms, ArrayList<Lang> langs, ArrayList<GameMode> gameModes, ArrayList<Developer> developers, ArrayList<Review> reviews) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -121,6 +124,14 @@ public class Game {
 
     public void setCategories(ArrayList<Category> categories) {
         this.categories = categories;
+    }
+
+    public Media getThumbnail() {
+        return thumbnail;
+    }
+
+    public void setThumbnail(Media thumbnail) {
+        this.thumbnail = thumbnail;
     }
 
     public ArrayList<Platform> getPlatforms() {

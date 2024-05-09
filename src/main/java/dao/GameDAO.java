@@ -100,9 +100,6 @@ public class GameDAO {
                     categories.add(categoryDAO.findById(gameCategory.getCategory().getId()));
                 }
 
-                ArrayList<Media> images = new MediaDAO().getMediasPageByGameId(rs.getInt("game.id"), "image");
-                ArrayList<Media> videos = new MediaDAO().getMediasPageByGameId(rs.getInt("game.id"), "video");
-
                 ArrayList<GamePlatform> gamePlatforms = new GamePlatformDAO().getPlatformsByGameId(rs.getInt("game.id"));
                 ArrayList<Platform> platforms = new ArrayList<>();
 
@@ -133,7 +130,7 @@ public class GameDAO {
 
                 ArrayList<Review> reviews = new ReviewDAO().getReviewsByGameId(rs.getInt("game.id"));
 
-                return new Game(rs.getInt("id"), rs.getString("name"), rs.getString("description"), rs.getDate("release_date"), rs.getInt("price"), categories, images, videos, platforms, langs, gameModes, developers, reviews);
+                return new Game(rs.getInt("id"), rs.getString("name"), rs.getString("description"), rs.getDate("release_date"), rs.getInt("price"), categories, platforms, langs, gameModes, developers, reviews);
             }
 
         } catch (Exception e) {

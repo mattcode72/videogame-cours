@@ -13,7 +13,7 @@
                 <c:out value="${game.name}"></c:out>
             </h1>
             <div class="col-12">
-                <c:forEach items="${game.images}" var="image">
+                <c:forEach items="${images}" var="image">
                              <span>
                                 <img src="${pageContext.request.contextPath}${image.path}" alt="" width="400"/>
                              </span>
