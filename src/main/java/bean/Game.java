@@ -66,7 +66,7 @@ public class Game {
         this.price = price;
     }
 
-    public Game(String name, String description, Date releaseDate, int price, ArrayList<Platform> platforms, ArrayList<Lang> langs, ArrayList<Developer> developers, ArrayList<Category> categories, ArrayList<GameMode> gameModes) {
+    public Game(String name, String description, Date releaseDate, int price, ArrayList<Platform> platforms, ArrayList<Lang> langs, ArrayList<Developer> developers, ArrayList<Category> categories, ArrayList<GameMode> gameModes, Media thumbnail) {
         this.name = name;
         this.description = description;
         this.releaseDate = releaseDate;
@@ -76,6 +76,7 @@ public class Game {
         this.developers = developers;
         this.categories = categories;
         this.gameModes = gameModes;
+        this.thumbnail = thumbnail;
     }
 
     public int getId() {

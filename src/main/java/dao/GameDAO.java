@@ -4,6 +4,7 @@ import bean.*;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -160,11 +161,11 @@ public class GameDAO {
     }
 
 
-    public void addGame (Game game) {
+    public int addGame (Game game) {
         try {
             Database.Connect();
-            PreparedStatement sql = Database.connexion.prepareStatement(" INSERT INTO game (name, description, release_date, price)"
-                    + " VALUES (?, ?, ?, ?)");
+            PreparedStatement sql = Database.connexion.prepareStatement("INSERT INTO game (name, description, release_date, price)"
+                    + " VALUES (?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
 
             sql.setString(1, game.getName());
             sql.setString(2, game.getDescription());
@@ -173,10 +174,17 @@ public class GameDAO {
 
             sql.executeUpdate();
 
+            int gameId = 0;
+            ResultSet generatedKeys = sql.getGeneratedKeys();
+            if (generatedKeys.next()) {
+                gameId = generatedKeys.getInt(1);
+            }
+
+
             PreparedStatement sql2 = Database.connexion.prepareStatement("INSERT INTO game_platform (game_id, platform_id) VALUES (?, ?)");
 
             for (Platform platform : game.getPlatforms()) {
-                sql2.setInt(1, game.getId());
+                sql2.setInt(1, gameId);
                 sql2.setInt(2, platform.getId());
                 sql2.executeUpdate();
             }
@@ -184,7 +192,7 @@ public class GameDAO {
             PreparedStatement sql3 = Database.connexion.prepareStatement("INSERT INTO game_lang (game_id, lang_id) VALUES (?, ?)");
 
             for (Lang lang : game.getLangs()) {
-                sql3.setInt(1, game.getId());
+                sql3.setInt(1, gameId);
                 sql3.setInt(2, lang.getId());
                 sql3.executeUpdate();
             }
@@ -192,7 +200,7 @@ public class GameDAO {
             PreparedStatement sql4 = Database.connexion.prepareStatement("INSERT INTO game_category (game_id, category_id) VALUES (?, ?)");
 
             for (Category category : game.getCategories()) {
-                sql4.setInt(1, game.getId());
+                sql4.setInt(1, gameId);
                 sql4.setInt(2, category.getId());
                 sql4.executeUpdate();
             }
@@ -200,7 +208,7 @@ public class GameDAO {
             PreparedStatement sql5 = Database.connexion.prepareStatement("INSERT INTO game_developer (game_id, developer_id) VALUES (?, ?)");
 
             for (Developer developer : game.getDevelopers()) {
-                sql5.setInt(1, game.getId());
+                sql5.setInt(1, gameId);
                 sql5.setInt(2, developer.getId());
                 sql5.executeUpdate();
             }
@@ -208,13 +216,23 @@ public class GameDAO {
             PreparedStatement sql6 = Database.connexion.prepareStatement("INSERT INTO game_gamemode (game_id, gamemode_id) VALUES (?, ?)");
 
             for (GameMode gameMode : game.getGameModes()) {
-                sql6.setInt(1, game.getId());
+                sql6.setInt(1, gameId);
                 sql6.setInt(2, gameMode.getId());
                 sql6.executeUpdate();
             }
 
+            PreparedStatement sql7 = Database.connexion.prepareStatement("INSERT INTO media (path, is_thumbnail, game_id, media_type_id) VALUES (?, ?, ?, ?)");
+            sql7.setString(1, game.getThumbnail().getPath());
+            sql7.setBoolean(2, true);
+            sql7.setInt(3, gameId);
+            sql7.setInt(4, 1);
+            sql7.executeUpdate();
+
+            return gameId;
+
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return 0;
     }
 }

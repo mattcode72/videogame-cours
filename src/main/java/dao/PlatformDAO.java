@@ -18,7 +18,7 @@ public class PlatformDAO {
             ResultSet rs = sql.executeQuery();
 
             if (rs.next()) {
-                return new Platform(rs.getString("name"));
+                return new Platform(rs.getInt("id"), rs.getString("name"));
             }
 
         } catch (Exception e) {

@@ -4,7 +4,7 @@
 </head>
 <body>
     <div class="container">
-        <form method="post">
+        <form method="post" enctype="multipart/form-data">
             <div class="mb-4">
                 <label class="form-label">Name</label>
                 <input type="text" class="form-control" id="name" name="name">
