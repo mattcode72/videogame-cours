@@ -38,8 +38,13 @@
             <img alt="" src="${pageContext.request.contextPath}/assets/img/logo/videogame.jpg" width="75">
         </a>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <div class="d-flex" style="margin-right: 5vw;">
-                <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll">
+            <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll">
+                <li class="nav-item">
+                    <a class="nav-link" href="/videogame_war_exploded/games">Games</a>
+                </li>
+            </ul>
+            <div class="d-flex ms-auto">
+                <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="text-align: right">
                     <c:if test="${not empty currentUser}">
                         <li class="nav-item dropdown">
 
@@ -48,11 +53,11 @@
                                 <c:out value="${currentUser.pseudo}"/>
                             </button>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="/videogame_war_exploded/profil">Mon compte</a></li>
+                                <li><a class="dropdown-item" href="/videogame_war_exploded/profil">My account</a></li>
                                 <li>
                                     <hr class="dropdown-divider">
                                 </li>
-                                <li><a class="dropdown-item" href="/videogame_war_exploded/logout">Se deconnecter</a>
+                                <li><a class="dropdown-item" href="/videogame_war_exploded/logout">Sign out</a>
                                 </li>
                             </ul>
                         </li>
@@ -60,28 +65,24 @@
 
                     <c:if test="${ empty currentUser}">
                         <a href="/videogame_war_exploded/login">
-                            <button class="btn btn-outline-primary me-4">
-                                Se connecter
-                            </button>
+                            <button class="btn btn-outline-primary me-4">Sign in</button>
                         </a>
                         <a href="/videogame_war_exploded/inscription">
-                            <button class="btn btn-outline-primary me-4">S'inscrire</button>
+                            <button class="btn btn-outline-primary me-4">New account</button>
                         </a>
                     </c:if>
                 </ul>
 
-                <!-- GESTION PANIER -->
                 <a href="cart" style="margin-left: 10px;">
                     <button type="button" class="btn btn-outline-success position-relative">
                         <i class="fa-solid fa-cart-shopping"></i>
                         <c:if test="${panier.count() > 0}">
-		<span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-		<c:out value="${panier.count() }"></c:out>
-		</span>
+  <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+  <c:out value="${panier.count() }"></c:out>
+  </span>
                         </c:if>
                     </button>
                 </a>
-                <!-- FIN GESTION PANIER -->
 
             </div>
         </div>
