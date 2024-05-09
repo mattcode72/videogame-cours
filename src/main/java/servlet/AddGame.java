@@ -3,18 +3,26 @@ package servlet;
 import bean.*;
 import dao.*;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.Part;
 
+import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
 @WebServlet("/admin/addGame")
+@MultipartConfig
 public class AddGame extends HttpServlet {
     PlatformDAO platformDAO = new PlatformDAO();
     LangDAO langDAO = new LangDAO();
@@ -85,25 +93,33 @@ public class AddGame extends HttpServlet {
             gameModesList.add(gameModeDAO.findById(Integer.parseInt(gamemode)));
         }
 
-        Game game = new Game(name, description, releaseDate, price, platformsList, langsList, developersList, categoriesList, gameModesList);
+        Part filePart = request.getPart("thumbnail");
+        String fileName = filePart.getSubmittedFileName();
 
-        gameDAO.addGame(game);
+        Media thumbnail = new Media(true, "/assets/img/minia/" + fileName, new MediaType(1, "image"));
 
-        // Add thumbnail
-        Media media = new Media(true, request.getParameter("thumbnail"), game, new MediaType(1, "image"));
-        mediaDAO.addMedia(media);
+        Game game = new Game(name, description, releaseDate, price, platformsList, langsList, developersList, categoriesList, gameModesList, thumbnail);
+
+        int gameId = gameDAO.addGame(game);
+        game.setId(gameId);
+
+
+        filePart.write(getServletContext().getRealPath("assets/img/minia") + File.separator + fileName);
 
         // Add images
-        String[] images = request.getParameterValues("images");
-        for (String image : images) {
-            media = new Media(false, image, game, new MediaType(1, "image"));
-            mediaDAO.addMedia(media);
+        for (Part part : request.getParts()) {
+            if (!part.getName().equals("images")) {
+                continue;
+            }
+            String imageName = part.getSubmittedFileName();
+            System.out.println(imageName);
+            part.write(getServletContext().getRealPath("assets/img/fiche") + File.separator + imageName);
+            mediaDAO.addMedia(new Media(false, "/assets/img/fiche/" + imageName, game, new MediaType(1, "image")));
         }
 
         // Add video
         String video = request.getParameter("video");
-        media = new Media(false, video, game, new MediaType(2, "video"));
-        mediaDAO.addMedia(media);
+        mediaDAO.addMedia(new Media(false, video, game, new MediaType(2, "video")));
 
         doGet(request, response);
     }

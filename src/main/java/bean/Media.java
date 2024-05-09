@@ -17,6 +17,12 @@ public class Media {
         this.mediaType = mediaType;
     }
 
+    public Media(Boolean isThumbnail, String path, MediaType mediaType) {
+        this.isThumbnail = isThumbnail;
+        this.path = path;
+        this.mediaType = mediaType;
+    }
+
     public Media(int id, Boolean isThumbnail, String path, Game game, MediaType mediaType) {
         this.id = id;
         this.isThumbnail = isThumbnail;

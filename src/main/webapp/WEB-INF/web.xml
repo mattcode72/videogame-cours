@@ -10,6 +10,10 @@
             <include-prelude>/vue/navbar/header.jsp</include-prelude>
 
         </jsp-property-group>
-
     </jsp-config>
+
+    <servlet-mapping>
+        <servlet-name>default</servlet-name>
+        <url-pattern>/assets/img/minia</url-pattern>
+    </servlet-mapping>
 </web-app>
