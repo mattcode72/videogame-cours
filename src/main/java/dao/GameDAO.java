@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -63,19 +64,34 @@ public class GameDAO {
     }
 
 
-    public ArrayList<Game> getGamesByFilter(String categoryId, String platformId, String langId, String search) {
+    public ArrayList<Game> getGamesByFilter(String[] categoriesId, String[] platformsId, String[] langsId, String search) {
 
         Stream<Game> gamesFiltered = getAll().stream();
 
-        if (categoryId != null) {
-            gamesFiltered = gamesFiltered.filter(game -> game.getCategories().stream().anyMatch(category -> category.getId() == Integer.parseInt(categoryId)));
+        if (categoriesId != null) {
+            for (String category : categoriesId) {
+                if (category != null) {
+                    gamesFiltered = gamesFiltered.filter(game -> game.getCategories().stream().anyMatch(categ -> categ.getId() == Integer.parseInt(category)));
+                }
+            }
         }
-        if (platformId != null) {
-            gamesFiltered = gamesFiltered.filter(game -> game.getPlatforms().stream().anyMatch(platform -> platform.getId() == Integer.parseInt(platformId)));
+
+        if (platformsId != null) {
+            for (String platform : platformsId) {
+                if (platform != null) {
+                    gamesFiltered = gamesFiltered.filter(game -> game.getPlatforms().stream().anyMatch(plat -> plat.getId() == Integer.parseInt(platform)));
+                }
+            }
         }
-        if (langId != null) {
-            gamesFiltered = gamesFiltered.filter(game -> game.getLangs().stream().anyMatch(lang -> lang.getId() == Integer.parseInt(langId)));
+
+        if (langsId != null) {
+            for (String lang : langsId) {
+                if (lang != null) {
+                    gamesFiltered = gamesFiltered.filter(game -> game.getLangs().stream().anyMatch(lan -> lan.getId() == Integer.parseInt(lang)));
+                }
+            }
         }
+
         if (!search.isEmpty()) {
             gamesFiltered = gamesFiltered.filter(game -> game.getName().toLowerCase().contains(search.toLowerCase()));
         }
@@ -85,6 +101,7 @@ public class GameDAO {
 
 
     public Game findById(int id) {
+        Database.Connect();
         CategoryDAO categoryDAO = new CategoryDAO();
         try  {
 
@@ -140,7 +157,7 @@ public class GameDAO {
         return null;
     }
 
-    public void updateGame (Game game) {
+    public void updateGame (Game game, String action) {
         try {
             Database.Connect();
             PreparedStatement sql = Database.connexion.prepareStatement(" UPDATE game SET"
@@ -154,6 +171,80 @@ public class GameDAO {
             sql.setInt(5, game.getId());
 
             sql.executeUpdate();
+
+            if (Objects.equals(action, "delete")) {
+                PreparedStatement sql2 = Database.connexion.prepareStatement("DELETE FROM game_platform WHERE game_id = ? and platform_id = ?");
+                for (Platform platform : game.getPlatforms()) {
+                    sql2.setInt(1, game.getId());
+                    sql2.setInt(2, platform.getId());
+                    sql2.executeUpdate();
+                }
+
+                PreparedStatement sql3 = Database.connexion.prepareStatement("DELETE FROM game_lang WHERE game_id = ? and lang_id = ?");
+                for (Lang lang : game.getLangs()) {
+                    sql3.setInt(1, game.getId());
+                    sql3.setInt(2, lang.getId());
+                    sql3.executeUpdate();
+                }
+
+                PreparedStatement sql4 = Database.connexion.prepareStatement("DELETE FROM game_developer WHERE game_id = ? and developer_id = ?");
+                for (Developer developer : game.getDevelopers()) {
+                    sql4.setInt(1, game.getId());
+                    sql4.setInt(2, developer.getId());
+                    sql4.executeUpdate();
+                }
+
+                PreparedStatement sql5 = Database.connexion.prepareStatement("DELETE FROM game_category WHERE game_id = ? and category_id = ?");
+                for (Category category : game.getCategories()) {
+                    sql5.setInt(1, game.getId());
+                    sql5.setInt(2, category.getId());
+                    sql5.executeUpdate();
+                }
+
+                PreparedStatement sql6 = Database.connexion.prepareStatement("DELETE FROM game_gamemode WHERE game_id = ? and gamemode_id = ?");
+                for (GameMode gameMode : game.getGameModes()) {
+                    sql6.setInt(1, game.getId());
+                    sql6.setInt(2, gameMode.getId());
+                    sql6.executeUpdate();
+                }
+            } else {
+                PreparedStatement sql2 = Database.connexion.prepareStatement("INSERT INTO game_platform (game_id, platform_id) VALUES (?, ?)");
+                for (Platform platform : game.getPlatforms()) {
+                    sql2.setInt(1, game.getId());
+                    sql2.setInt(2, platform.getId());
+                    sql2.executeUpdate();
+                }
+
+                PreparedStatement sql3 = Database.connexion.prepareStatement("INSERT INTO game_lang (game_id, lang_id) VALUES (?, ?)");
+                for (Lang lang : game.getLangs()) {
+                    sql3.setInt(1, game.getId());
+                    sql3.setInt(2, lang.getId());
+                    sql3.executeUpdate();
+                }
+
+                PreparedStatement sql4 = Database.connexion.prepareStatement("INSERT INTO game_developer (game_id, developer_id) VALUES (?, ?)");
+                for (Developer developer : game.getDevelopers()) {
+                    sql4.setInt(1, game.getId());
+                    sql4.setInt(2, developer.getId());
+                    sql4.executeUpdate();
+                }
+
+                PreparedStatement sql5 = Database.connexion.prepareStatement("INSERT INTO game_category (game_id, category_id) VALUES (?, ?)");
+                for (Category category : game.getCategories()) {
+                    sql5.setInt(1, game.getId());
+                    sql5.setInt(2, category.getId());
+                    sql5.executeUpdate();
+                }
+
+                PreparedStatement sql6 = Database.connexion.prepareStatement("INSERT INTO game_gamemode (game_id, gamemode_id) VALUES (?, ?)");
+                for (GameMode gameMode : game.getGameModes()) {
+                    sql6.setInt(1, game.getId());
+                    sql6.setInt(2, gameMode.getId());
+                    sql6.executeUpdate();
+                }
+            }
+
+
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -234,5 +325,40 @@ public class GameDAO {
             e.printStackTrace();
         }
         return 0;
+    }
+
+    public void delete(int gameId) {
+        try {
+            Database.Connect();
+
+            PreparedStatement sql2 = Database.connexion.prepareStatement("DELETE FROM game_platform WHERE game_id = ?");
+            sql2.setInt(1, gameId);
+            sql2.executeUpdate();
+
+            PreparedStatement sql3 = Database.connexion.prepareStatement("DELETE FROM game_lang WHERE game_id = ?");
+            sql3.setInt(1, gameId);
+            sql3.executeUpdate();
+
+            PreparedStatement sql4 = Database.connexion.prepareStatement("DELETE FROM game_developer WHERE game_id = ?");
+            sql4.setInt(1, gameId);
+            sql4.executeUpdate();
+
+            PreparedStatement sql5 = Database.connexion.prepareStatement("DELETE FROM game_category WHERE game_id = ?");
+            sql5.setInt(1, gameId);
+            sql5.executeUpdate();
+
+            PreparedStatement sql6 = Database.connexion.prepareStatement("DELETE FROM game_gamemode WHERE game_id = ?");
+            sql6.setInt(1, gameId);
+            sql6.executeUpdate();
+
+            PreparedStatement sql7 = Database.connexion.prepareStatement("DELETE FROM media WHERE game_id = ?");
+            sql7.setInt(1, gameId);
+
+            PreparedStatement sql = Database.connexion.prepareStatement("DELETE FROM game WHERE id = ?");
+            sql.setInt(1, gameId);
+            sql.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

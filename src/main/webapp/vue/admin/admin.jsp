@@ -58,12 +58,39 @@
                 <td><c:out value="${game.description}"></c:out></td>
                 <td><c:out value="${game.releaseDate}"></c:out></td>
                 <td><c:out value="${game.price}"></c:out></td>
-                <td><a href="admin/showGame?id=<c:out value="${game.id}"/>">View</a></td>
+                <td>
+                    <a href="admin/showGame?id=<c:out value="${game.id}"/>">View</a>
+                    <a href="#" data-toggle="modal" data-target="#deleteGameModal">Delete</a>
+                </td>
             </tr>
         </c:forEach>
         </tbody>
     </table>
     <a href="admin/addGame" class="btn btn-primary"><i class="fas fa-plus"></i> Add a Game</a>
+</div>
+
+
+<!-- Modal Deactivate Account -->
+<div class="modal fade" id="deleteGameModal" tabindex="-1" aria-labelledby="deleteGameModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content border-3 border-danger">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5 text-danger" id="deleteGameModalLabel">Game delete</h1>
+                <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="text-danger fw-bold">Are you sure you want to delete this game ?</div>
+                <form id="deactivateForm" method="post">
+                    <input type="hidden" class="form-control" name="formSubmited" value="suppAccount">
+                    <input type="hidden" class="form-control" id="userIDtoDeactivate" name="userIDtoDeactivate">
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                <button type="submit" form="deactivateForm" class="btn btn-outline-danger" name="deleteGame">Delete game</button>
+            </div>
+        </div>
+    </div>
 </div>
 
 <!-- Bootstrap Scripts -->

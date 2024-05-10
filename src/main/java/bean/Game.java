@@ -79,6 +79,19 @@ public class Game {
         this.thumbnail = thumbnail;
     }
 
+    public Game(int id, String name, String description, Date releaseDate, int price, ArrayList<Platform> platforms, ArrayList<Lang> langs, ArrayList<Developer> developers, ArrayList<Category> categories, ArrayList<GameMode> gameModes) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.releaseDate = releaseDate;
+        this.price = price;
+        this.platforms = platforms;
+        this.langs = langs;
+        this.developers = developers;
+        this.categories = categories;
+        this.gameModes = gameModes;
+    }
+
     public int getId() {
         return id;
     }
