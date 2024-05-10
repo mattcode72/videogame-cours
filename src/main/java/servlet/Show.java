@@ -5,6 +5,7 @@ import java.io.IOException;
 import bean.Developer;
 import bean.GameDeveloper;
 import dao.MediaDAO;
+import dao.ReviewDAO;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -19,7 +20,9 @@ import jakarta.servlet.http.HttpSession;
  */
 @WebServlet("/show")
 public class Show extends HttpServlet {
-    private static final long serialVersionUID = 1L;
+    MediaDAO mediaDAO = new MediaDAO();
+    GameDAO gameDao = new GameDAO();
+    ReviewDAO reviewDAO = new ReviewDAO();
 
     /**
      * @see HttpServlet#HttpServlet()
@@ -33,8 +36,6 @@ public class Show extends HttpServlet {
      * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
      */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        MediaDAO mediaDAO = new MediaDAO();
-        GameDAO gameDao = new GameDAO();
 
         int id = Integer.parseInt(request.getParameter("id"));
 
@@ -42,17 +43,21 @@ public class Show extends HttpServlet {
 
         request.setAttribute("images", mediaDAO.getMediasPageByGameId(id, 1));
 
+        request.setAttribute("reviews", reviewDAO.getReviewsByGameId(id));
+
         request.getRequestDispatcher("vue/game/show.jsp").forward(request, response);
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession(true);
+        int userId = (int) session.getAttribute("userId");
         String action = request.getParameter("action");
         if (action.equals("addToRating")) {
-            String rating = request.getParameter("rating");
-            String comment = request.getParameter("comment");
-            System.out.println(rating);
-            System.out.println(comment);
+            int gameId = Integer.parseInt(request.getParameter("gameId"));
+
+            reviewDAO.addReview(gameId, userId, Integer.parseInt(request.getParameter("rating")), request.getParameter("comment"));
         }
+
+
     }
 }

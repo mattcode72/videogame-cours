@@ -34,4 +34,19 @@ public class ReviewDAO {
 
         return null;
     }
+
+    public void addReview(int gameId, int userId, int rating, String content) {
+        try {
+            PreparedStatement sql = Database.connexion.prepareStatement("insert into review (game_id, users_id, rating, content, date) values (?, ?, ?, ?, now())");
+
+            sql.setInt(1, gameId);
+            sql.setInt(2, userId);
+            sql.setInt(3, rating);
+            sql.setString(4, content);
+
+            sql.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }
