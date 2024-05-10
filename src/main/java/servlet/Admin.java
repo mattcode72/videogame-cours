@@ -30,4 +30,14 @@ public class Admin extends HttpServlet {
 
         request.getRequestDispatcher("/vue/admin/admin.jsp").forward(request, response);
     }
+
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String action = request.getParameter("action");
+        GameDAO gameDAO = new GameDAO();
+        if (action.equals("deleteToGame")) {
+            int gameId = Integer.parseInt(request.getParameter("gameId"));
+            gameDAO.delete(gameId);
+            response.sendRedirect(request.getContextPath() + "/admin");
+        }
+    }
 }

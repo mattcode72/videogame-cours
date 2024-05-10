@@ -60,7 +60,7 @@
                 <td><c:out value="${game.price}"></c:out></td>
                 <td>
                     <a href="admin/showGame?id=<c:out value="${game.id}"/>">View</a>
-                    <a href="#" data-toggle="modal" data-target="#deleteGameModal">Delete</a>
+                    <a href="#" data-toggle="modal" data-target="#deleteGameModal" data-id="<c:out value="${game.id}"/>">Delete</a>
                 </td>
             </tr>
         </c:forEach>
@@ -71,28 +71,40 @@
 
 
 <!-- Modal Deactivate Account -->
-<div class="modal fade" id="deleteGameModal" tabindex="-1" aria-labelledby="deleteGameModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content border-3 border-danger">
+<div class="modal fade" id="deleteGameModal" data-id="" tabindex="-1" aria-labelledby="deleteGameModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5 text-danger" id="deleteGameModalLabel">Game delete</h1>
-                <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                <h5 class="modal-title text-danger" id="deleteGameModalLabel">Delete Game</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
-            <div class="modal-body">
-                <div class="text-danger fw-bold">Are you sure you want to delete this game ?</div>
-                <form id="deactivateForm" method="post">
-                    <input type="hidden" class="form-control" name="formSubmited" value="suppAccount">
-                    <input type="hidden" class="form-control" id="userIDtoDeactivate" name="userIDtoDeactivate">
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
-                <button type="submit" form="deactivateForm" class="btn btn-outline-danger" name="deleteGame">Delete game</button>
-            </div>
+            <form method="post" action="">
+                <div class="modal-body">
+                    <p class="text-danger font-weight-bold">Are you sure you want to delete this game?</p>
+                    <input type="hidden" id="gameId" name="gameId">
+                    <input type="hidden" name="action" value="deleteToGame">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-danger" name="deleteGame">Delete Game</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
 
+<script>
+    $(document).ready(function(){
+        $('#deleteGameModal').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget); // Button that triggered the modal
+            var gameId = button.data('id'); // Extract info from data-* attributes
+            var modal = $(this);
+            modal.find('#gameId').val(gameId);
+        });
+    });
+</script>
 <!-- Bootstrap Scripts -->
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
