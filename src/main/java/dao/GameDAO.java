@@ -351,12 +351,12 @@ public class GameDAO {
             sql6.setInt(1, gameId);
             sql6.executeUpdate();
 
-            PreparedStatement sql7 = Database.connexion.prepareStatement("DELETE FROM media WHERE game_id = ?");
-            sql7.setInt(1, gameId);
-
             PreparedStatement sql = Database.connexion.prepareStatement("DELETE FROM game WHERE id = ?");
             sql.setInt(1, gameId);
             sql.executeUpdate();
+
+            PreparedStatement sql7 = Database.connexion.prepareStatement("DELETE FROM media WHERE game_id = ?");
+            sql7.setInt(1, gameId);
         } catch (Exception e) {
             e.printStackTrace();
         }
