@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import bean.Developer;
 import bean.GameDeveloper;
+import bean.User;
 import dao.MediaDAO;
 import dao.ReviewDAO;
 import jakarta.servlet.ServletException;
@@ -50,14 +51,16 @@ public class Show extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession(true);
-        int userId = (int) session.getAttribute("userId");
+        User user = (User) session.getAttribute("currentUser");
+        int userId = user.getId();
+
         String action = request.getParameter("action");
         if (action.equals("addToRating")) {
             int gameId = Integer.parseInt(request.getParameter("gameId"));
-
             reviewDAO.addReview(gameId, userId, Integer.parseInt(request.getParameter("rating")), request.getParameter("comment"));
-        }
 
+           response.sendRedirect("show?id=" + gameId);
+        }
 
     }
 }

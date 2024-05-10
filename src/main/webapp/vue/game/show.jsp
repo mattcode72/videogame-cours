@@ -144,6 +144,7 @@
                     </div>
                     <textarea id="comment" name="comment" rows="4" cols="50" placeholder="Write your comment here..."></textarea>
                     <input type="hidden" id="rating" name="rating">
+                    <input type="hidden" id="gameId" name="gameId" value="${game.id}">
                     <input type="hidden" name="action" value="addToRating">
                 </div>
                 <div class="modal-footer">
