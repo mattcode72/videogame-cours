@@ -96,7 +96,7 @@ public class Profil extends HttpServlet {
                     String hashNewPwd = BCrypt.hashpw(request.getParameter("newPassword"), BCrypt.gensalt());
 
                     userDao.updatePassword((User) session.getAttribute("currentUser"),hashNewPwd );
-                    session.invalidate();
+                    request.getSession().invalidate();
                     request.setAttribute("msn", "Success! ");
                     request.setAttribute("msnType",  "OK");
                 }

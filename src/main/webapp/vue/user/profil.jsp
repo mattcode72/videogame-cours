@@ -138,21 +138,21 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content border-3 border-danger">
             <div class="modal-header">
-                <h1 class="modal-title fs-5 text-danger" id="deactivateModalLabel">D�sactivation de compte</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <h1 class="modal-title fs-5 text-danger" id="deactivateModalLabel">Delete account</h1>
+                <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <div class="text-danger fw-bold">�tes-vous s�r de vouloir d�sactiver votre compte ?</div>
-                <div class="text-danger opacity-75">Si oui, veuillez confirmer votre d�cision en saisissant votre mot de passe :</div>
+                <div class="text-danger fw-bold">Are you sure you want to delete your account ?</div>
+                <div class="text-danger opacity-75">Enter your password</div>
                 <form id="deactivateForm" method="post">
                     <input type="hidden" class="form-control" name="formSubmited" value="suppAccount">
                     <input type="hidden" class="form-control" id="userIDtoDeactivate" name="userIDtoDeactivate">
-                    <input type="password" class="form-control mt-3" id="pwdForDeactivation" name="pwdForDeactivation" placeholder="Saisissez votre mot de passe">
+                    <input type="password" class="form-control mt-3" id="pwdForDeactivation" name="pwdForDeactivation" placeholder="Password">
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
-                <button type="submit" form="deactivateForm" class="btn btn-outline-danger">D�sactiver mon compte</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <button type="submit" form="deactivateForm" class="btn btn-outline-danger">Delete account</button>
             </div>
         </div>
     </div>

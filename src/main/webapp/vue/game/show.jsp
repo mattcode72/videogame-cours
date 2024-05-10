@@ -18,6 +18,25 @@
             max-height: 400px;
             margin: 0 auto;
         }
+
+        .star {
+            border: none;
+            background: none;
+            color: black;
+            font-size: 2em;
+            cursor: pointer;
+            display: inline-block;
+            margin: 0 0.25em;
+        }
+
+        #comment {
+            width: 100%;
+            padding: 0.5em;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            margin-top: 1em;
+        }
     </style>
 </head>
 
@@ -98,8 +117,72 @@
             </table>
         </div>
     </div>
+    <div class="col-md-12 text-center">
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#rateGameModal">
+            Rate this game
+        </button>
+    </div>
 </div>
 
+<div class="modal fade" id="rateGameModal" tabindex="-1" role="dialog" aria-labelledby="rateGameModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="rateGameModalLabel">Rate this game</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form method="post" action="">
+                <div class="modal-body">
+                    <div id="stars" style="text-align: center">
+                        <button type="button" class="star" data-value="1">&#9734;</button>
+                        <button type="button" class="star" data-value="2">&#9734;</button>
+                        <button type="button" class="star" data-value="3">&#9734;</button>
+                        <button type="button" class="star" data-value="4">&#9734;</button>
+                        <button type="button" class="star" data-value="5">&#9734;</button>
+                    </div>
+                    <textarea id="comment" name="comment" rows="4" cols="50" placeholder="Write your comment here..."></textarea>
+                    <input type="hidden" id="rating" name="rating">
+                    <input type="hidden" name="action" value="addToRating">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" name="addRating" class="btn btn-primary">Submit Rating</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function(){
+        $("#rateGameModal").modal();
+    });
+    $(document).ready(function(){
+        $(".star").click(function() {
+            var value = $(this).data("value");
+            $("#stars .star").each(function() {
+                if ($(this).data("value") <= value) {
+                    $(this).html("&#9733;").css("color", "yellow");
+                    $(this).css({"-webkit-text-stroke-width": "1px", "-webkit-text-stroke-color": "black"});
+                } else {
+                    $(this).html("&#9734;").css("color", "black");
+                    $(this).css({"-webkit-text-stroke-width": "0px"});
+                }
+            });
+            // Update the hidden input field
+            $("#rating").val(value);
+        });
+
+        $("#comment").change(function() {
+            // Update the hidden input field
+            $("#comment").val($(this).val());
+        });
+
+        $("#rateGameModal").modal();
+    });
+</script>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

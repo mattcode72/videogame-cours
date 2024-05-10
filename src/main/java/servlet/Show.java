@@ -12,6 +12,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import dao.GameDAO;
+import jakarta.servlet.http.HttpSession;
 
 /**
  * Servlet implementation class Show
@@ -42,5 +43,16 @@ public class Show extends HttpServlet {
         request.setAttribute("images", mediaDAO.getMediasPageByGameId(id, 1));
 
         request.getRequestDispatcher("vue/game/show.jsp").forward(request, response);
+    }
+
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession session = request.getSession(true);
+        String action = request.getParameter("action");
+        if (action.equals("addToRating")) {
+            String rating = request.getParameter("rating");
+            String comment = request.getParameter("comment");
+            System.out.println(rating);
+            System.out.println(comment);
+        }
     }
 }

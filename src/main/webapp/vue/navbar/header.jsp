@@ -46,6 +46,11 @@
             <div class="d-flex ms-auto">
                 <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="text-align: right">
                     <c:if test="${not empty currentUser}">
+                        <c:if test="${currentUser.isAdmin == true}">
+                            <li class="nav-item">
+                                <a class="btn btn-outline-success me-4" href="/videogame_war_exploded/admin">Panel admin</a>
+                            </li>
+                        </c:if>
                         <li class="nav-item dropdown">
 
                             <button type="button" class="btn btn-outline-success dropdown-toggle"

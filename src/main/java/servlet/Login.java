@@ -2,6 +2,7 @@ package servlet;
 
 import java.io.IOException;
 
+import bean.User;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -10,6 +11,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 import dao.UserDAO;
+import org.springframework.aop.scope.ScopedProxyUtils;
 
 /**
  * Servlet implementation class Login
@@ -47,19 +49,10 @@ public class Login extends HttpServlet {
 
             doGet(request, response);
         } else {
-            if (usDao.login(entered_email, entered_pwd) != null) {
-                /*
-                 * On prepare la session afin de garder en memoire tampon le user connect�
-                 * avec HttpSession
-                 */
-
+            User user = usDao.login(entered_email, entered_pwd);
+            if (user != null) {
                 HttpSession session = request.getSession(true);
-
-                /*
-                 * ICI, session.setAttribute("utilisateur", prenom+" "+usDao.login(email_saisie, pwd_saisie).getNom()
-                 * on recupére le le prenom de l'utilisateur et le stocker dans l'attribut utilisateur
-                 * */
-                session.setAttribute("currentUser", usDao.login(entered_email, entered_pwd));
+                session.setAttribute("currentUser", user);
                 response.sendRedirect("/videogame_war_exploded/games");
             } else {
                 request.setAttribute("erreur", "L'email ou le mot de passe incorrect.");
