@@ -1,5 +1,6 @@
 package dao;
 
+import bean.Game;
 import bean.Review;
 import bean.User;
 
@@ -15,7 +16,7 @@ public class ReviewDAO {
         UserDAO userDAO = new UserDAO();
 
         try {
-            PreparedStatement sql = Database.connexion.prepareStatement("select * from review where game_id = ?");
+            PreparedStatement sql = Database.connexion.prepareStatement("select * from review where game_id = ? and is_validated = true");
 
             sql.setInt(1, gameId);
 
@@ -35,18 +36,45 @@ public class ReviewDAO {
         return null;
     }
 
-    public void addReview(int gameId, int userId, int rating, String content) {
+    public void addReview(Review review) {
         try {
-            PreparedStatement sql = Database.connexion.prepareStatement("insert into review (game_id, users_id, rating, content, date) values (?, ?, ?, ?, now())");
+            PreparedStatement sql = Database.connexion.prepareStatement("insert into review (game_id, users_id, rating, content, date, is_validated) values (?, ?, ?, ?, now(), false)");
 
-            sql.setInt(1, gameId);
-            sql.setInt(2, userId);
-            sql.setInt(3, rating);
-            sql.setString(4, content);
+            sql.setInt(1, review.getGame().getId());
+            sql.setInt(2, review.getUser().getId());
+            sql.setInt(3, review.getRating());
+            sql.setString(4, review.getContent());
 
             sql.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
+
+    public ArrayList<Review> getReviewsNotValidated () {
+        ArrayList<Review> reviews = new ArrayList<>();
+
+        UserDAO userDAO = new UserDAO();
+        GameDAO gameDAO = new GameDAO();
+
+        try {
+            PreparedStatement sql = Database.connexion.prepareStatement("select * from review where is_validated = false");
+
+            ResultSet rs = sql.executeQuery();
+
+            while (rs.next()) {
+                User user = userDAO.findById(rs.getInt("users_id"));
+                Game game = gameDAO.findById(rs.getInt("game_id"));
+
+                Review review = new Review(rs.getInt("rating"), rs.getString("content"), rs.getDate("date"), game, user);
+
+                reviews.add(review);
+            }
+            return reviews;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
 }

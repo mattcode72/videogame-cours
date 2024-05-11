@@ -7,6 +7,7 @@ public class Review {
     private int rating;
     private String content;
     private Date date;
+    private boolean isValidated;
     private Game game;
     private User user;
 
@@ -21,11 +22,19 @@ public class Review {
         this.user = user;
     }
 
-    public Review(int id, int rating, String content, Date date, Game game, User user) {
+    public Review(int rating, String content, Game game, User user) {
+        this.rating = rating;
+        this.content = content;
+        this.game = game;
+        this.user = user;
+    }
+
+    public Review(int id, int rating, String content, Date date, boolean isValidated, Game game, User user) {
         this.id = id;
         this.rating = rating;
         this.content = content;
         this.date = date;
+        this.isValidated = isValidated;
         this.game = game;
         this.user = user;
     }
@@ -68,6 +77,14 @@ public class Review {
 
     public void setDate(Date date) {
         this.date = date;
+    }
+
+    public boolean getIsValidated() {
+        return isValidated;
+    }
+
+    public void setValidated(boolean isValidated) {
+        this.isValidated = isValidated;
     }
 
     public Game getGame() {
