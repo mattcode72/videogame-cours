@@ -1,62 +1,60 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
+<style>
+    .delimiter-line {
+        border: 0;
+        border-top: 2px solid #000;
+        margin: 20px 0;
+        max-width: 1170px;
+    }
+</style>
+
 <div class="container">
 
     <form method="post" action="">
         <input type="hidden" name="action" value="addToFilter">
-        <div class="row">
-            <div class="col-2 me-3">
-                <div class="row">
-                <div class="col-12" style="margin-top: 10px;">
-                <select name="filterCategory"  class="selectpicker" multiple>
+        <div class="row align-items-center">
+            <div class="col-2">
+                <label for="filterCategory">Categories :</label>
+                <select id="filterCategory" name="filterCategory" class="selectpicker" multiple>
                     <c:forEach items="${categories}" var="category">
                         <option value="<c:out value="${category.id}"></c:out>">
                             <c:out value="${category.name}"></c:out>
                         </option>
                     </c:forEach>
                 </select>
-                </div>
-                </div>
             </div>
-            <div class="col-2 me-3">
-                <div class="row">
-                    <div class="col-12" style="margin-top: 10px;">
-                        <label>
-                            <select name="filterPlatform" class="selectpicker" multiple>
-                                <c:forEach items="${platforms}" var="platform">
-                                    <option value="<c:out value="${platform.id}"></c:out>">
-                                        <c:out value="${platform.name}"></c:out>
-                                    </option>
-                                </c:forEach>
-                            </select>
-                        </label>
-                    </div>
-                </div>
+            <div class="col-2" style="margin-left: 10px;">
+                <label for="filterPlatform">Platforms :</label>
+                <select id="filterPlatform" name="filterPlatform" class="selectpicker" multiple>
+                    <c:forEach items="${platforms}" var="platform">
+                        <option value="<c:out value="${platform.id}"></c:out>">
+                            <c:out value="${platform.name}"></c:out>
+                        </option>
+                    </c:forEach>
+                </select>
             </div>
-            <div class="col-2 me-3">
-                <div class="row">
-                    <div class="col-12" style="margin-top: 10px;">
-                        <select name="filterLang" class="selectpicker" multiple>
-                            <c:forEach items="${langs}" var="lang">
-                                <option value="<c:out value="${lang.id}"></c:out>">
-                                    <c:out value="${lang.name}"></c:out>
-                                </option>
-                            </c:forEach>
-                        </select>
-                    </div>
-                </div>
+            <div class="col-2" style="margin-left: 10px;">
+                <label for="filterLang">Languages :</label>
+                <select id="filterLang" name="filterLang" class="selectpicker" multiple>
+                    <c:forEach items="${langs}" var="lang">
+                        <option value="<c:out value="${lang.id}"></c:out>">
+                            <c:out value="${lang.name}"></c:out>
+                        </option>
+                    </c:forEach>
+                </select>
             </div>
-            <div class="col-2">
-                <div class="row">
-                    <div class="col-12" style="margin-top: 10px;">
-                        <input type="text" name="filterName" placeholder="Game name" class="form-control">
-                    </div>
-                </div>
+            <div class="col-2" style="margin-left: 10px;">
+                <label for="filterName"></label>
+                <input type="text" id="filterName" name="filterName" placeholder="Game name" class="form-control">
+            </div>
+            <div class="col-2" style="margin-left: 10px;">
+                <button type="submit" class="btn btn-primary mt-4">Search</button>
             </div>
         </div>
-        <button type="submit" class="btn btn-primary" style="margin-top: 10px;">Search</button>
     </form>
 
+    <hr class="delimiter-line">
 
     <div class="row row-cols-1 row-cols-md-3 g-4">
         <c:forEach items="${games}" var="game">
