@@ -42,7 +42,8 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text"><i class="fas fa-user"></i></span>
                                 </div>
-                                <input type="text" class="form-control" id="userPseudo" name="userPseudo" value="<c:out value="${currentUser.pseudo}"/>" readonly>
+                                <input type="text" class="form-control" id="userPseudo" name="userPseudo"
+                                       value="<c:out value="${currentUser.pseudo}"/>" readonly>
                             </div>
                         </div>
                     </div>
@@ -53,11 +54,14 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text"><i class="fas fa-envelope"></i></span>
                                 </div>
-                                <input type="email" class="form-control" id="userEmail" name="userEmail" value="<c:out value="${currentUser.email}"/>" readonly>
+                                <input type="email" class="form-control" id="userEmail" name="userEmail"
+                                       value="<c:out value="${currentUser.email}"/>" readonly>
                             </div>
                         </div>
                     </div>
-                    <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#editUser"><i class="fas fa-edit"></i> Edit</button>
+                    <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#editUser"><i
+                            class="fas fa-edit"></i> Edit
+                    </button>
                 </form>
             </div>
         </div>
@@ -69,13 +73,16 @@
             <input type="hidden" class="form-control" name="formSubmited" value="accountPassword">
             <div class="form-row">
                 <div class="form-group col-md-4">
-                    <input type="password" class="form-control" id="oldPassword" name="oldPassword" placeholder="Old Password" required>
+                    <input type="password" class="form-control" id="oldPassword" name="oldPassword"
+                           placeholder="Old Password" required>
                 </div>
                 <div class="form-group col-md-4">
-                    <input type="password" class="form-control" id="newPassword" name="newPassword" placeholder="New Password" required>
+                    <input type="password" class="form-control" id="newPassword" name="newPassword"
+                           placeholder="New Password" required>
                 </div>
                 <div class="form-group col-md-4">
-                    <input type="password" class="form-control" id="confPassword" name="confPassword" placeholder="Confirm New Password" required>
+                    <input type="password" class="form-control" id="confPassword" name="confPassword"
+                           placeholder="Confirm New Password" required>
                 </div>
             </div>
             <button type="submit" class="btn btn-outline-warning"><i class="fas fa-lock"></i> Change Password</button>
@@ -94,7 +101,9 @@
 
         <!-- Disable Account -->
         <h3 class="text-secondary"><i class="fas fa-user-slash"></i> Disable Account</h3>
-        <button type="button" class="btn btn-sm btn-outline-danger" data-toggle="modal" data-target="#deactivateModal"><i class="fas fa-times"></i> Disable My Account</button>
+        <button type="button" class="btn btn-sm btn-outline-danger" data-toggle="modal" data-target="#deactivateModal">
+            <i class="fas fa-times"></i> Disable My Account
+        </button>
 
     </section>
 </div>
@@ -147,7 +156,8 @@
                 <form id="deactivateForm" method="post">
                     <input type="hidden" class="form-control" name="formSubmited" value="suppAccount">
                     <input type="hidden" class="form-control" id="userIDtoDeactivate" name="userIDtoDeactivate">
-                    <input type="password" class="form-control mt-3" id="pwdForDeactivation" name="pwdForDeactivation" placeholder="Password">
+                    <input type="password" class="form-control mt-3" id="pwdForDeactivation" name="pwdForDeactivation"
+                           placeholder="Password">
                 </form>
             </div>
             <div class="modal-footer">

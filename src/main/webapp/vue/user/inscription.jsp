@@ -14,11 +14,11 @@
 
         <div class="mb-4">
             <label class="form-label">Pseudo</label>
-            <input type="text" class="form-control" id="pseudo" name="pseudo" >
+            <input type="text" class="form-control" id="pseudo" name="pseudo">
         </div>
         <div class="mb-4">
             <label class="form-label">Email address</label>
-            <input type="email" class="form-control" id="email" name="email" >
+            <input type="email" class="form-control" id="email" name="email">
         </div>
         <div class="mb-4">
             <label for="exampleInputPassword1" class="form-label">Password</label>

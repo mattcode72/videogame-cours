@@ -10,10 +10,12 @@
         .padding-20 {
             padding: 20px;
         }
+
         label.form-label {
             font-weight: bold;
             margin-bottom: 5px;
         }
+
         .title-bar {
             border-top: 1px solid #ccc;
             margin-top: 20px;
@@ -62,10 +64,10 @@
             <label class="form-label"><i class="fas fa-laptop"></i> Platforms :</label>
             <select name="platforms" id="platform" class="selectpicker" multiple>
                 <c:forEach items="${platforms}" var="platform">
-                    <c:set var="isSelected" value="false" />
+                    <c:set var="isSelected" value="false"/>
                     <c:forEach items="${game.platforms}" var="gamePlatform">
                         <c:if test="${gamePlatform.id == platform.id}">
-                            <c:set var="isSelected" value="true" />
+                            <c:set var="isSelected" value="true"/>
                         </c:if>
                     </c:forEach>
                     <c:choose>
@@ -89,10 +91,10 @@
             <label class="form-label">Languages : </label>
             <select name="langs" id="lang" class="selectpicker" multiple>
                 <c:forEach items="${langs}" var="lang">
-                    <c:set var="isSelected" value="false" />
+                    <c:set var="isSelected" value="false"/>
                     <c:forEach items="${game.langs}" var="gameLang">
                         <c:if test="${gameLang.id == lang.id}">
-                            <c:set var="isSelected" value="true" />
+                            <c:set var="isSelected" value="true"/>
                         </c:if>
                     </c:forEach>
                     <c:choose>
@@ -115,10 +117,10 @@
             <label class="form-label">Developers : </label>
             <select name="developers" id="developer" class="selectpicker" multiple>
                 <c:forEach items="${developers}" var="developer">
-                    <c:set var="isSelected" value="false" />
+                    <c:set var="isSelected" value="false"/>
                     <c:forEach items="${game.developers}" var="gameDeveloper">
                         <c:if test="${gameDeveloper.id == developer.id}">
-                            <c:set var="isSelected" value="true" />
+                            <c:set var="isSelected" value="true"/>
                         </c:if>
                     </c:forEach>
                     <c:choose>
@@ -141,10 +143,10 @@
             <label class="form-label">Categories : </label>
             <select name="categories" id="category" class="selectpicker" multiple>
                 <c:forEach items="${categories}" var="category">
-                    <c:set var="isSelected" value="false" />
+                    <c:set var="isSelected" value="false"/>
                     <c:forEach items="${game.categories}" var="gameCategory">
                         <c:if test="${gameCategory.id == category.id}">
-                            <c:set var="isSelected" value="true" />
+                            <c:set var="isSelected" value="true"/>
                         </c:if>
                     </c:forEach>
                     <c:choose>
@@ -168,10 +170,10 @@
             <label class="form-label">Game Modes : </label>
             <select name="gamemodes" id="gamemode" class="selectpicker" multiple>
                 <c:forEach items="${gameModes}" var="gamemode">
-                    <c:set var="isSelected" value="false" />
+                    <c:set var="isSelected" value="false"/>
                     <c:forEach items="${game.gameModes}" var="gameGameMode">
                         <c:if test="${gameGameMode.id == gamemode.id}">
-                            <c:set var="isSelected" value="true" />
+                            <c:set var="isSelected" value="true"/>
                         </c:if>
                     </c:forEach>
                     <c:choose>

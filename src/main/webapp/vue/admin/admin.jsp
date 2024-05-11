@@ -39,7 +39,7 @@
     </table>
 
 
-    <h1>Review management</h1>
+    <h1><i class="fas fa-star"></i> Review management</h1>
     <table class="table">
         <thead>
         <tr>
@@ -57,7 +57,9 @@
                 <td><c:out value="${review.game.name}"></c:out></td>
                 <td><c:out value="${review.rating}"></c:out></td>
                 <td><c:out value="${review.content}"></c:out></td>
-                <td><a href="#" data-toggle="modal" data-target="#validateReviewModal" data-gameid="<c:out value="${review.game.id}"/>" data-userid="<c:out value="${review.user.id}"/>">View</a></td>
+                <td><a href="#" data-toggle="modal" data-target="#validateReviewModal"
+                       data-gameid="<c:out value="${review.game.id}"/>"
+                       data-userid="<c:out value="${review.user.id}"/>">View</a></td>
             </tr>
         </c:forEach>
         </tbody>
@@ -87,7 +89,8 @@
                 <td><c:out value="${game.price}"></c:out></td>
                 <td>
                     <a href="admin/showGame?id=<c:out value="${game.id}"/>">View</a>
-                    <a href="#" data-toggle="modal" data-target="#deleteGameModal" data-id="<c:out value="${game.id}"/>">Delete</a>
+                    <a href="#" data-toggle="modal" data-target="#deleteGameModal"
+                       data-id="<c:out value="${game.id}"/>">Delete</a>
                 </td>
             </tr>
         </c:forEach>
@@ -98,7 +101,8 @@
 
 
 <!-- Modal delete game -->
-<div class="modal fade" id="deleteGameModal" data-id="" tabindex="-1" aria-labelledby="deleteGameModalLabel" aria-hidden="true">
+<div class="modal fade" id="deleteGameModal" data-id="" tabindex="-1" aria-labelledby="deleteGameModalLabel"
+     aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -124,7 +128,8 @@
 
 
 <!-- Modal validate review -->
-<div class="modal fade" id="validateReviewModal" data-id="" tabindex="-1" aria-labelledby="validateReviewModalLabel" aria-hidden="true">
+<div class="modal fade" id="validateReviewModal" data-id="" tabindex="-1" aria-labelledby="validateReviewModalLabel"
+     aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -151,7 +156,7 @@
 
 
 <script>
-    $(document).ready(function(){
+    $(document).ready(function () {
         $('#deleteGameModal').on('show.bs.modal', function (event) {
             var button = $(event.relatedTarget); // Button that triggered the modal
             var gameId = button.data('id'); // Extract info from data-* attributes
@@ -160,15 +165,15 @@
         });
 
         $('#validateReviewModal').on('show.bs.modal', function (event) {
-            var button = $(event.relatedTarget); // Button that triggered the modal
-            var userId = button.data('userid'); // Extract info from data-* attributes
+            var button = $(event.relatedTarget);
+            var userId = button.data('userid');
             var modal = $(this);
             modal.find('#userId').val(userId);
         });
 
         $('#validateReviewModal').on('show.bs.modal', function (event) {
-            var button = $(event.relatedTarget); // Button that triggered the modal
-            var idGame = button.data('gameid'); // Extract info from data-* attributes
+            var button = $(event.relatedTarget);
+            var idGame = button.data('gameid');
             var modal = $(this);
             modal.find('#idGame').val(idGame);
         });

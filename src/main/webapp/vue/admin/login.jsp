@@ -1,4 +1,3 @@
-<!--  ==============Message en cas d'erreur ================ -->
 <c:if test="${not empty erreur }">
 
     <div class="alert alert-danger">

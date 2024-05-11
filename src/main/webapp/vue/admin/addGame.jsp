@@ -10,10 +10,12 @@
         .padding-20 {
             padding: 20px;
         }
+
         label.form-label {
             font-weight: bold;
             margin-bottom: 5px;
         }
+
         .title-bar {
             border-top: 1px solid #ccc;
             margin-top: 20px;

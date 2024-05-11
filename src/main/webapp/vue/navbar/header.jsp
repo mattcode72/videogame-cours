@@ -48,7 +48,8 @@
                     <c:if test="${not empty currentUser}">
                         <c:if test="${currentUser.isAdmin == true}">
                             <li class="nav-item">
-                                <a class="btn btn-outline-success me-4" href="/videogame_war_exploded/admin">Panel admin</a>
+                                <a class="btn btn-outline-success me-4" href="/videogame_war_exploded/admin">Panel
+                                    admin</a>
                             </li>
                         </c:if>
                         <li class="nav-item dropdown">
