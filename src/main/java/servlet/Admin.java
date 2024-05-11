@@ -25,9 +25,11 @@ public class Admin extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         UserDAO userDao = new UserDAO();
         GameDAO gameDao = new GameDAO();
+        ReviewDAO reviewDAO = new ReviewDAO();
 
         request.setAttribute("users", userDao.getAll());
         request.setAttribute("games", gameDao.getAll());
+        request.setAttribute("reviews", reviewDAO.getReviewsNotValidated());
 
         request.getRequestDispatcher("/vue/admin/admin.jsp").forward(request, response);
     }

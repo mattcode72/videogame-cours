@@ -37,6 +37,33 @@
         </c:forEach>
         </tbody>
     </table>
+
+
+    <h1>Review management</h1>
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">Pseudo</th>
+            <th scope="col">Game</th>
+            <th scope="col">Rating</th>
+            <th scope="col">Content</th>
+            <th scope="col">Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <c:forEach items="${reviews}" var="review">
+            <tr>
+                <td><c:out value="${review.user.pseudo}"></c:out></td>
+                <td><c:out value="${review.game.name}"></c:out></td>
+                <td><c:out value="${review.rating}"></c:out></td>
+                <td><c:out value="${review.content}"></c:out></td>
+                <td><a href="#" data-toggle="modal" data-target="#validateReviewModal" data-id="<c:out value="${review.id}"/>">View</a></td>
+            </tr>
+        </c:forEach>
+        </tbody>
+    </table>
+
+
     <hr>
     <h1><i class="fas fa-gamepad"></i> Game Management</h1>
     <table class="table">
