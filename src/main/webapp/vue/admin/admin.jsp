@@ -57,7 +57,7 @@
                 <td><c:out value="${review.game.name}"></c:out></td>
                 <td><c:out value="${review.rating}"></c:out></td>
                 <td><c:out value="${review.content}"></c:out></td>
-                <td><a href="#" data-toggle="modal" data-target="#validateReviewModal" data-id="<c:out value="${review.id}"/>">View</a></td>
+                <td><a href="#" data-toggle="modal" data-target="#validateReviewModal" data-gameid="<c:out value="${review.game.id}"/>" data-userid="<c:out value="${review.user.id}"/>">View</a></td>
             </tr>
         </c:forEach>
         </tbody>
@@ -97,7 +97,7 @@
 </div>
 
 
-<!-- Modal Deactivate Account -->
+<!-- Modal delete game -->
 <div class="modal fade" id="deleteGameModal" data-id="" tabindex="-1" aria-labelledby="deleteGameModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -122,6 +122,34 @@
     </div>
 </div>
 
+
+<!-- Modal validate review -->
+<div class="modal fade" id="validateReviewModal" data-id="" tabindex="-1" aria-labelledby="validateReviewModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-danger" id="validateReviewModalLabel">Validate review</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form method="post" action="">
+                <div class="modal-body">
+                    <p class="text-success font-weight-bold">Are you sure you want to validate this review?</p>
+                    <input type="hidden" id="userId" name="userId">
+                    <input type="hidden" id="idGame" name="idGame">
+                    <input type="hidden" name="action" value="validateReview">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-success" name="deleteGame">Validate</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
 <script>
     $(document).ready(function(){
         $('#deleteGameModal').on('show.bs.modal', function (event) {
@@ -130,8 +158,23 @@
             var modal = $(this);
             modal.find('#gameId').val(gameId);
         });
+
+        $('#validateReviewModal').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget); // Button that triggered the modal
+            var userId = button.data('userid'); // Extract info from data-* attributes
+            var modal = $(this);
+            modal.find('#userId').val(userId);
+        });
+
+        $('#validateReviewModal').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget); // Button that triggered the modal
+            var idGame = button.data('gameid'); // Extract info from data-* attributes
+            var modal = $(this);
+            modal.find('#idGame').val(idGame);
+        });
     });
 </script>
+
 <!-- Bootstrap Scripts -->
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>

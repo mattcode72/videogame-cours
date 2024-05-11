@@ -39,8 +39,7 @@ public class Review {
         this.user = user;
     }
 
-    public Review(int id, int rating, String content, Date date, User user) {
-        this.id = id;
+    public Review(int rating, String content, Date date, User user) {
         this.rating = rating;
         this.content = content;
         this.date = date;

@@ -25,10 +25,11 @@ public class ReviewDAO {
             while (rs.next()) {
                 User user = userDAO.findById(rs.getInt("users_id"));
 
-                Review review = new Review(rs.getInt("id"), rs.getInt("rating"), rs.getString("content"), rs.getDate("date"), user);
+                Review review = new Review(rs.getInt("rating"), rs.getString("content"), rs.getDate("date"), user);
 
                 reviews.add(review);
             }
+            return reviews;
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -77,16 +78,45 @@ public class ReviewDAO {
         return null;
     }
 
-    public void validateReview(int id) {
+    public void validateReview(Review review) {
         try {
-            PreparedStatement sql = Database.connexion.prepareStatement("update review set is_validated = true where id = ?");
+            PreparedStatement sql = Database.connexion.prepareStatement("update review set is_validated = true where game_id = ? and users_id = ?");
 
-            sql.setInt(1, id);
+            sql.setInt(1, review.getGame().getId());
+            sql.setInt(2, review.getUser().getId());
 
             sql.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+
+    public Review getReviewByGameAndUserId(int gameId, int userId) {
+        UserDAO userDAO = new UserDAO();
+        GameDAO gameDAO = new GameDAO();
+
+        try {
+            PreparedStatement sql = Database.connexion.prepareStatement("select * from review where game_id = ? and users_id = ?");
+
+            sql.setInt(1, gameId);
+            sql.setInt(2, userId);
+
+            ResultSet rs = sql.executeQuery();
+
+            if (rs.next()) {
+                User user = userDAO.findById(rs.getInt("users_id"));
+                Game game = gameDAO.findById(rs.getInt("game_id"));
+
+                Review review = new Review(rs.getInt("rating"), rs.getString("content"), rs.getDate("date"), game, user);
+
+                return review;
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
 }

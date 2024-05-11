@@ -33,8 +33,7 @@ public class MediaDAO {
         ArrayList<Media> medias = new ArrayList<>();
         try {
             PreparedStatement sqlMedias = Database.connexion.prepareStatement("select media.id, media.path, media.is_thumbnail from media" +
-                                                                                  " INNER JOIN media_type ON media_type.id = media.media_type_id" +
-                                                                                  " where media.game_id = ? AND media_type.id = ? AND media.is_thumbnail = 0");
+                                                                                  " where media.game_id = ? AND media_type_id = ? AND media.is_thumbnail = 0");
 
             sqlMedias.setInt(1, gameId);
             sqlMedias.setInt(2, mediaType);

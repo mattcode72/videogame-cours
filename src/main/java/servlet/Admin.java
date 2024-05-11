@@ -1,5 +1,6 @@
 package servlet;
 
+import bean.Review;
 import dao.GameDAO;
 import dao.ReviewDAO;
 import dao.UserDAO;
@@ -43,8 +44,12 @@ public class Admin extends HttpServlet {
             int gameId = Integer.parseInt(request.getParameter("gameId"));
             gameDAO.delete(gameId);
         } else if (action.equals("validateReview")) {
-            int reviewId = Integer.parseInt(request.getParameter("reviewId"));
-            reviewDAO.validateReview(reviewId);
+            System.out.println("gameId : " + request.getParameter("idGame"));
+            System.out.println("userId : " + request.getParameter("userId"));
+            int gameId = Integer.parseInt(request.getParameter("idGame"));
+            int userId = Integer.parseInt(request.getParameter("userId"));
+            Review review = reviewDAO.getReviewByGameAndUserId(gameId, userId);
+            reviewDAO.validateReview(review);
         }
 
         response.sendRedirect(request.getContextPath() + "/admin");

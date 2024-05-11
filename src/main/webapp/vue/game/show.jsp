@@ -122,6 +122,27 @@
             Rate this game
         </button>
     </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-5 col-md-6 col-12 pb-4">
+                <h1>Comments</h1>
+
+                <c:forEach items="${reviews}" var="review">
+                    <div class="comment mt-4 text-justify float-left">
+                        <h4>${review.user.pseudo}</h4>
+
+                        <c:forEach begin="1" end="${review.rating}">
+                            <span style="color: yellow">&#9733;</span>
+                        </c:forEach>
+
+                        <span><fmt:formatDate value="${review.date}" pattern="dd MMMM yyyy"/></span>
+                        <br>
+                        <p>${review.content}</p>
+                    </div>
+                </c:forEach>
+        </div>
+    </div>
 </div>
 
 <div class="modal fade" id="rateGameModal" tabindex="-1" role="dialog" aria-labelledby="rateGameModalLabel" aria-hidden="true">
