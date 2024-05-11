@@ -77,4 +77,16 @@ public class ReviewDAO {
         return null;
     }
 
+    public void validateReview(int id) {
+        try {
+            PreparedStatement sql = Database.connexion.prepareStatement("update review set is_validated = true where id = ?");
+
+            sql.setInt(1, id);
+
+            sql.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 }

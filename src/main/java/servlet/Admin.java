@@ -1,6 +1,7 @@
 package servlet;
 
 import dao.GameDAO;
+import dao.ReviewDAO;
 import dao.UserDAO;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -34,10 +35,16 @@ public class Admin extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("action");
         GameDAO gameDAO = new GameDAO();
+        ReviewDAO reviewDAO = new ReviewDAO();
+
         if (action.equals("deleteToGame")) {
             int gameId = Integer.parseInt(request.getParameter("gameId"));
             gameDAO.delete(gameId);
-            response.sendRedirect(request.getContextPath() + "/admin");
+        } else if (action.equals("validateReview")) {
+            int reviewId = Integer.parseInt(request.getParameter("reviewId"));
+            reviewDAO.validateReview(reviewId);
         }
+
+        response.sendRedirect(request.getContextPath() + "/admin");
     }
 }
